@@ -1,0 +1,112 @@
+.navShell {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 30;
+  padding-top: 1rem;
+  pointer-events: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4.75rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(8, 10, 16, 0.52);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  pointer-events: auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.brandMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.18), transparent 45%),
+    linear-gradient(135deg, rgba(181, 138, 255, 0.3), rgba(103, 132, 255, 0.1));
+  color: #fff;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+}
+
+.brandText {
+  display: grid;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.brandText span,
+.links a {
+  color: rgba(245, 241, 234, 0.76);
+}
+
+.brandText span {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.brandText strong {
+  font-size: 0.98rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.links {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.links a {
+  font-size: 0.92rem;
+}
+
+.navButton {
+  min-height: 2.8rem;
+  padding-inline: 1.1rem;
+}
+
+@media (max-width: 920px) {
+  .links a:not(.navButton) {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .navShell {
+    padding-top: 0.75rem;
+  }
+
+  .nav {
+    min-height: 4.25rem;
+    padding: 0.55rem 0.8rem;
+  }
+
+  .brandText span {
+    font-size: 0.68rem;
+  }
+
+  .brandText strong {
+    font-size: 0.78rem;
+    max-width: 13rem;
+  }
+}

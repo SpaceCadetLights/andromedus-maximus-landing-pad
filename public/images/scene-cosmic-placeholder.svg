@@ -1,0 +1,21 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#070913"/>
+  <circle cx="1167" cy="270" r="244" fill="url(#paint0_radial)"/>
+  <circle cx="818" cy="514" r="128" fill="url(#paint1_radial)"/>
+  <circle cx="800" cy="450" r="216" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="1"/>
+  <circle cx="800" cy="450" r="168" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="1"/>
+  <circle cx="800" cy="450" r="120" stroke="#FFF5E1" stroke-opacity="0.26" stroke-width="1"/>
+  <text x="120" y="160" fill="#F4EFE8" font-family="Arial, Helvetica, sans-serif" font-size="34" letter-spacing="10">SCENE 01</text>
+  <text x="120" y="225" fill="#F4EFE8" font-family="Arial, Helvetica, sans-serif" font-size="72">Cosmic Hero Placeholder</text>
+  <text x="120" y="284" fill="#F4EFE8" fill-opacity="0.68" font-family="Arial, Helvetica, sans-serif" font-size="28">Swap with final hero render or looping reveal video.</text>
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1167 270) rotate(90) scale(244)">
+      <stop stop-color="#7A67FF" stop-opacity="0.52"/>
+      <stop offset="1" stop-color="#7A67FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(818 514) rotate(90) scale(128)">
+      <stop stop-color="#FFE7C8" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFE7C8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
