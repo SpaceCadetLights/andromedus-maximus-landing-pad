@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&display=swap");
+
+:root {
+  --overlay-bg: rgba(16, 18, 42, 0.34);
+  --overlay-glass: blur(26px) saturate(160%) brightness(1.04);
+  --overlay-cyan: #7cf7ff;
+  --overlay-purple: #b48cff;
+  --overlay-pink: #ff7ae5;
+  --overlay-green: #7cff9a;
+  --overlay-text: rgba(255, 255, 255, 0.93);
+  --overlay-muted: rgba(255, 255, 255, 0.72);
+  --overlay-muted-soft: rgba(255, 255, 255, 0.5);
+  --overlay-radius-xl: 26px;
+  --overlay-radius-lg: 18px;
+  --overlay-display-font: "Oxanium", "Avenir Next", "Segoe UI", sans-serif;
+  --overlay-panel-shadow:
+    0 0 0 1px rgba(124, 247, 255, 0.05) inset,
+    0 20px 60px rgba(0, 0, 0, 0.42),
+    0 0 60px rgba(124, 247, 255, 0.035),
+    0 0 120px rgba(124, 247, 255, 0.015),
+    0 0 0 0.5px rgba(180, 140, 255, 0.08) inset;
+}
+
+@property --overlay-border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes overlay-border-rotate {
+  to {
+    --overlay-border-angle: 360deg;
+  }
+}
+
+@keyframes overlay-light-sweep {
+  0% {
+    background-position: 250% 0;
+  }
+
+  100% {
+    background-position: -250% 0;
+  }
+}
+
+@keyframes overlay-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+.overlay-gradient-title {
+  margin: 0;
+  font-family: var(--overlay-display-font);
+  background: linear-gradient(
+    135deg,
+    #e4f9ff 0%,
+    #bceeff 35%,
+    #dfbfff 65%,
+    #ffc2ec 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.overlay-display-text {
+  font-family: var(--overlay-display-font);
+  font-optical-sizing: auto;
+}
+
+.overlay-subtitle-text {
+  margin: 0;
+  color: var(--overlay-muted);
+  letter-spacing: 0.02em;
+}
+
+.overlay-glass-panel {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(600px 400px at 24% 14%, rgba(140, 180, 255, 0.06), transparent 55%),
+    radial-gradient(420px 320px at 84% 88%, rgba(255, 122, 229, 0.06), transparent 58%),
+    var(--overlay-bg);
+  backdrop-filter: var(--overlay-glass);
+  -webkit-backdrop-filter: var(--overlay-glass);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--overlay-panel-shadow);
+}
+
+.overlay-glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--overlay-border-angle),
+    rgba(124, 247, 255, 0.65),
+    rgba(180, 140, 255, 0.6),
+    rgba(255, 122, 229, 0.55),
+    rgba(124, 255, 154, 0.55),
+    rgba(124, 247, 255, 0.65)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.84;
+  animation: overlay-border-rotate 25s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.overlay-glass-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.012) 46%,
+    rgba(124, 247, 255, 0.022) 50%,
+    rgba(255, 255, 255, 0.012) 54%,
+    transparent 65%
+  );
+  background-size: 250% 100%;
+  animation: overlay-light-sweep 14s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.overlay-glass-panel > * {
+  position: relative;
+  z-index: 2;
+}
+
+.overlay-glow-orb {
+  position: absolute;
+  width: clamp(54px, 8vw, 76px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.55),
+      rgba(255, 255, 255, 0.04) 44%,
+      rgba(124, 247, 255, 0.18) 60%,
+      rgba(180, 140, 255, 0.14) 80%
+    );
+  box-shadow:
+    0 0 40px rgba(124, 247, 255, 0.15),
+    0 0 80px rgba(180, 140, 255, 0.08);
+  overflow: hidden;
+}
+
+.overlay-glow-orb::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(124, 247, 255, 0.25),
+    rgba(180, 140, 255, 0.2),
+    rgba(255, 122, 229, 0.18),
+    transparent
+  );
+  filter: blur(8px);
+  animation: overlay-border-rotate 8s linear infinite;
+}
+
+.overlay-floating-bubble {
+  animation: overlay-float 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.overlay-label {
+  margin: 0 0 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--overlay-muted-soft);
+}
+
+.overlay-bubble-title {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--overlay-text);
+}
+
+.overlay-bubble-body {
+  margin: 0.55rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--overlay-muted);
+}

@@ -1,0 +1,5 @@
+.bubble {
+  width: min(22rem, calc(100vw - 2.5rem));
+  padding: 1rem 1.05rem 1.05rem;
+  border-radius: var(--overlay-radius-lg);
+}

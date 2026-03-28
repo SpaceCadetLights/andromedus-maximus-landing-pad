@@ -40,6 +40,14 @@ export type OverlayBeat = TimelineRange & {
   actions?: CtaLink[]
 }
 
+export type DebugOverlayItem = TimelineRange & {
+  id: string
+  kind: 'hero' | 'bubble'
+  title: string
+  body?: string
+  eyebrow?: string
+}
+
 export const heroContent = {
   eyebrow: 'Space Cadets Lighting',
   title: 'ANDROMEDUS MAXIMUS',
@@ -180,5 +188,25 @@ export const overlayBeats: OverlayBeat[] = [
     start: 0.84,
     end: 1,
     actions: ctaButtons,
+  },
+]
+
+export const debugOverlayItems: DebugOverlayItem[] = [
+  {
+    id: 'hero-title',
+    kind: 'hero',
+    title: 'ANDROMEDUS',
+    body: 'Sculptural light for immersive spaces',
+    start: 0,
+    end: 0.15,
+  },
+  {
+    id: 'hero-bubble',
+    kind: 'bubble',
+    eyebrow: 'Scene 01',
+    title: 'Cinematic Overlay System',
+    body: 'Glass panel styling and motion language now mirror the interactive resume reference.',
+    start: 0.04,
+    end: 0.18,
   },
 ]

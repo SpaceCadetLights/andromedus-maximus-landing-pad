@@ -1,9 +1,11 @@
-import { memo, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { CSSProperties, RefObject } from 'react'
 import {
+  type DebugOverlayItem,
   type OverlayBeat,
   type SceneDefinition,
   type VideoAsset,
+  debugOverlayItems,
   videoAssets,
 } from '../../data/siteContent'
 import { getRangeProgress, getRangeVisibility } from '../../data/timeline'
@@ -34,6 +36,22 @@ type CinematicBackgroundProps = {
 }
 
 const CINEMATIC_SCROLL_LENGTH_VH = 240
+
+function applyOverlayMotion(
+  element: HTMLDivElement | null,
+  item: DebugOverlayItem,
+  progress: number,
+  yDistance: number,
+): number {
+  if (!element) {
+    return 0
+  }
+
+  const visibility = getRangeVisibility(progress, item.start, item.end, 0.28)
+  element.style.opacity = visibility.toString()
+  element.style.transform = `translate3d(0, ${yDistance * (1 - visibility)}px, 0)`
+  return visibility
+}
 
 function useResponsiveVideoSource(videoAsset?: VideoAsset) {
   const [isMobile, setIsMobile] = useState(() =>
@@ -158,12 +176,41 @@ export function CinematicScrollSection({
   debugMode = false,
 }: CinematicScrollSectionProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const heroOverlayRef = useRef<HTMLDivElement | null>(null)
   const { syncProgress, handleLoadedMetadata, handleVideoError } =
     useScrollScrubVideo(videoRef, { debug: debugMode, easing: 0.3 })
+  const handleProgressChange = useCallback(
+    (nextProgress: number) => {
+      syncProgress(nextProgress)
+
+      if (!debugMode) {
+        return
+      }
+
+      const heroVisibility = applyOverlayMotion(
+        heroOverlayRef.current,
+        debugOverlayItems[0],
+        nextProgress,
+        26,
+      )
+
+      if (heroOverlayRef.current) {
+        const blurAmount = (1 - heroVisibility) * 20
+        const depthScale = 0.92 + heroVisibility * 0.08
+        const depthZ = (1 - heroVisibility) * -120
+
+        heroOverlayRef.current.style.transform = `perspective(1200px) translate3d(0, ${
+          26 * (1 - heroVisibility)
+        }px, ${depthZ}px) scale(${depthScale})`
+        heroOverlayRef.current.style.filter = `blur(${blurAmount}px)`
+      }
+    },
+    [debugMode, syncProgress],
+  )
   const { sectionRef, pinRef, progress } = useScrollTimeline({
     scrollLengthVh: CINEMATIC_SCROLL_LENGTH_VH,
     scrub: true,
-    onProgressChange: syncProgress,
+    onProgressChange: handleProgressChange,
     debug: debugMode,
     trackProgressState: !debugMode,
   })
@@ -211,6 +258,49 @@ export function CinematicScrollSection({
               onVideoError={handleVideoError}
               debugMode={debugMode}
             />
+
+            {debugMode ? (
+              <>
+                <div
+                  ref={heroOverlayRef}
+                  className={styles.debugHeroOverlay}
+                  style={{
+                    opacity: 0,
+                    transform: 'perspective(1200px) translate3d(0, 26px, -120px) scale(0.92)',
+                    filter: 'blur(20px)',
+                  }}
+                >
+                  <div className={styles.debugHeroPlate}>
+                    <span
+                      className={`${styles.debugHeroPlateCorner} ${styles.debugHeroPlateCornerTopLeft}`}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={`${styles.debugHeroPlateCorner} ${styles.debugHeroPlateCornerTopRight}`}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={`${styles.debugHeroPlateCorner} ${styles.debugHeroPlateCornerBottomLeft}`}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={`${styles.debugHeroPlateCorner} ${styles.debugHeroPlateCornerBottomRight}`}
+                      aria-hidden="true"
+                    />
+                    <span className={styles.debugHeroPlateGlow} aria-hidden="true" />
+                    <h1
+                      className={`overlay-gradient-title overlay-display-text ${styles.debugHeroTitle}`}
+                    >
+                      {debugOverlayItems[0].title}
+                    </h1>
+                    <div className={styles.debugHeroDivider} aria-hidden="true" />
+                    <p className={`overlay-subtitle-text ${styles.debugHeroSubtitle}`}>
+                      {debugOverlayItems[0].body}
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : null}
 
             {!debugMode ? (
               <>
