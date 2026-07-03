@@ -60,6 +60,19 @@ body {
   overflow-x: hidden;
 }
 
+/* Subtle nebula wash sitting behind the base color across the whole page. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('/assets/andromeda-maxima/nebula-page-bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.14;
+  pointer-events: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;

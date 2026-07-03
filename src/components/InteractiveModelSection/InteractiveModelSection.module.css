@@ -1,0 +1,102 @@
+.wrap {
+  margin-top: clamp(3rem, 8vw, 6rem);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 640px;
+  margin: 0 auto clamp(1.75rem, 4vw, 2.75rem);
+  text-align: center;
+  align-items: center;
+}
+
+.title {
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+}
+
+.body {
+  max-width: 52ch;
+  color: var(--muted);
+}
+
+.stage {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Brighter nebula wash directly behind the model — lets the deep-space
+   backdrop read more strongly here than across the rest of the page. */
+.nebula {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/assets/andromeda-maxima/nebula-page-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+  -webkit-mask-image: radial-gradient(ellipse 60% 62% at 50% 46%, #000 22%, transparent 72%);
+  mask-image: radial-gradient(ellipse 60% 62% at 50% 46%, #000 22%, transparent 72%);
+  pointer-events: none;
+}
+
+/* Soft central glow so the sculpture appears lit from within its own halo. */
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 42% 46% at 50% 44%, rgba(190, 160, 255, 0.22), transparent 70%),
+    radial-gradient(ellipse 55% 55% at 50% 46%, rgba(231, 189, 114, 0.1), transparent 72%);
+  pointer-events: none;
+}
+
+.viewer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: clamp(440px, 68vh, 720px);
+  /* Drop the model's black scene background so it reads over the nebula. */
+  mix-blend-mode: screen;
+  animation: viewerFadeIn 0.8s ease both;
+}
+
+@keyframes viewerFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hint {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: clamp(1rem, 2.5vw, 1.5rem);
+  transform: translateX(-50%);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: rgba(8, 10, 18, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .viewer {
+    height: clamp(360px, 60vh, 520px);
+  }
+}

@@ -38,7 +38,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <a className={styles.motion} href="#nebula" aria-label={hero.motionLabel}>
+        <a className={styles.motion} href="#explore-3d" aria-label={hero.motionLabel}>
           <span className={styles.motionPlay}>
             <PlayIcon width={18} height={18} />
           </span>

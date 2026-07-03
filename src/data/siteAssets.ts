@@ -39,6 +39,8 @@ export const siteAssets = {
   backgrounds: {
     galaxy: `${BASE}/galaxy-background.png`,
     spiralGalaxy: `${BASE}/spiral-galaxy.png`,
+    // Vertically-symmetric nebula used as a subtle full-page backdrop layer.
+    pageNebula: `${BASE}/nebula-page-bg.jpg`,
   },
   nebulaApp: {
     nebulaView: `${BASE}/nebula-app/nebula-view.png`,

@@ -1,5 +1,6 @@
 import { SiteHeader } from './components/SiteHeader/SiteHeader'
 import { HeroSection } from './components/HeroSection/HeroSection'
+import { InteractiveModelSection } from './components/InteractiveModelSection/InteractiveModelSection'
 import { NebulaControlSection } from './components/NebulaControlSection/NebulaControlSection'
 import { VibeComparisonSection } from './components/VibeComparisonSection/VibeComparisonSection'
 import { FeatureCardsSection } from './components/FeatureCardsSection/FeatureCardsSection'
@@ -17,6 +18,7 @@ function App() {
         <VibeComparisonSection />
         <FeatureCardsSection />
         <TrustStrip />
+        <InteractiveModelSection />
         <FooterCTA />
       </main>
       <SiteFooter />

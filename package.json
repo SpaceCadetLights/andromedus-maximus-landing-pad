@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@splinetool/viewer": "^1.12.98",
     "gsap": "^3.14.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"

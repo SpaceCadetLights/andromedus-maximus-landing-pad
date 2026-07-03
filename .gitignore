@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Raw source design assets (originals live locally; used copies are in public/)
+Andromeda Maxima Website Assets/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -49,8 +49,7 @@ export const primaryNav: NavItem[] = [
       { label: 'LaunchPad', href: `${WIX}/launchpad`, external: true },
       { label: 'Ion', href: `${WIX}/ion`, external: true },
       { label: 'Compassion Flower', href: `${WIX}/compassion-flower`, external: true },
-      // Current standalone page (this site). Update if a dedicated route exists.
-      { label: 'Andromeda Maxima', href: '#top', external: false },
+      { label: 'Andromeda Maxima', href: externalLinks.product, external: true },
     ],
   },
   {

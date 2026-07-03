@@ -51,6 +51,15 @@ export const hero = {
   motionLabel: 'See It in Motion',
 }
 
+export const model = {
+  eyebrow: 'Interactive 3D',
+  title: 'Explore every angle.',
+  body: 'Spin, tilt, and get up close with Andromeda Maxima. Drag to rotate the sculpture in real time and see how the form catches light from every direction.',
+  // Spline Viewer scene URL (rendered with a transparent background).
+  sceneUrl: 'https://my.spline.design/flowersculpturecopy-lbHB6xrQ75CWlzx5oLEFfYuy/scene.splinecode',
+  hint: 'Drag to rotate · Scroll to zoom',
+}
+
 export type FeaturePill = {
   id: string
   title: string
