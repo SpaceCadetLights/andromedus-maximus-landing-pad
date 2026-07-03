@@ -1,7 +1,13 @@
 /**
  * Centralized copy + CTA configuration for the Andromeda Maxima landing page.
  * Update text and links here — components stay presentation-only.
+ *
+ * Purchasing/configure CTAs deep-link to the live Wix product page; contact,
+ * app, and control CTAs deep-link to their matching Wix pages so the standalone
+ * page behaves like part of the main store.
  */
+
+import { externalLinks } from './navigation'
 
 export type CtaLink = {
   label: string
@@ -29,7 +35,7 @@ export const navLinks: NavLink[] = [
 
 export const navCta: CtaLink = {
   label: 'Shop Now',
-  href: '#configure',
+  href: externalLinks.shop,
   variant: 'primary',
 }
 
@@ -39,8 +45,8 @@ export const hero = {
   subtitle: 'Sculpted light. Infinite possibilities.',
   body: 'A kinetic chandelier that transforms every moment. From refined elegance to expressive color — you set the vibe.',
   actions: [
-    { label: 'Configure Yours', href: '#configure', variant: 'primary' },
-    { label: 'Book a Consultation', href: '#contact', variant: 'secondary' },
+    { label: 'Configure Yours', href: externalLinks.product, variant: 'primary' },
+    { label: 'Book a Consultation', href: externalLinks.connect, variant: 'secondary' },
   ] satisfies CtaLink[],
   motionLabel: 'See It in Motion',
 }
@@ -70,7 +76,7 @@ export const nebula = {
   ],
   palettesTitle: 'Curated Palettes',
   patternsTitle: 'Dynamic Patterns',
-  patternsCta: { label: 'View all patterns', href: '#patterns', variant: 'ghost' } satisfies CtaLink,
+  patternsMore: 'And many more to explore.',
 }
 
 export const vibe = {
@@ -105,14 +111,14 @@ export const featureCards: FeatureCard[] = [
     id: 'remote',
     title: 'Nebula Touch Remote',
     body: 'Instant control at your fingertips. Change brightness, colors, patterns, and speed — effortlessly.',
-    cta: { label: 'Explore Remote', href: '#remote', variant: 'ghost' },
+    cta: { label: 'Explore Remote', href: externalLinks.control, variant: 'ghost' },
     imageKey: 'remote',
   },
   {
     id: 'craftsmanship',
     title: 'Crafted to Inspire',
     body: 'Precision-engineered with premium materials and a sculptural form that defines any space.',
-    cta: { label: 'See the Craftsmanship', href: '#craft', variant: 'ghost' },
+    cta: { label: 'See the Craftsmanship', href: externalLinks.product, variant: 'ghost' },
     imageKey: 'craftsmanship',
   },
   {
@@ -120,7 +126,7 @@ export const featureCards: FeatureCard[] = [
     eyebrow: 'For Pros',
     title: 'Pro Edition Stage Ready',
     body: 'Engineered for large-scale installs and live environments. Built to perform under any spotlight.',
-    cta: { label: 'Explore Pro Edition', href: '#pro', variant: 'ghost' },
+    cta: { label: 'Explore Pro Edition', href: externalLinks.connect, variant: 'ghost' },
     imageKey: 'proStage',
   },
 ]
@@ -144,8 +150,7 @@ export const footer = {
   title: 'Bring the cosmos home.',
   body: 'Configure your Andromeda Maxima or speak with a lighting specialist about your space.',
   actions: [
-    { label: 'Configure Yours', href: '#configure', variant: 'primary' },
-    { label: 'Book a Consultation', href: '#contact', variant: 'secondary' },
+    { label: 'Configure Yours', href: externalLinks.product, variant: 'primary' },
+    { label: 'Book a Consultation', href: externalLinks.connect, variant: 'secondary' },
   ] satisfies CtaLink[],
-  legal: `© ${new Date().getFullYear()} Space Cadets Lighting. All rights reserved.`,
 }

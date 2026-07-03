@@ -166,3 +166,29 @@ export function CloseIcon(props: IconProps) {
     </svg>
   )
 }
+
+export function ChevronDown(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  )
+}
+
+export function FacebookIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M14 8.5V7c0-.9.4-1.5 1.5-1.5H17V2.7C16.5 2.6 15.6 2.5 14.7 2.5c-2.3 0-3.7 1.4-3.7 3.9v2.1H8.5V12H11v9.5h3V12h2.3l.4-3.5z" />
+    </svg>
+  )
+}
+
+export function InstagramIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="16.6" cy="7.4" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}

@@ -2,6 +2,14 @@
   margin-top: clamp(3rem, 8vw, 6rem);
 }
 
+.container {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+}
+
 .layout {
   display: grid;
   grid-template-columns: 0.66fr 1.6fr;
@@ -14,10 +22,6 @@
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--card-border);
-  background: var(--card-bg);
 }
 
 .title {

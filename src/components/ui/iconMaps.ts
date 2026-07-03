@@ -1,5 +1,7 @@
 import {
   ArchitecturalIcon,
+  FacebookIcon,
+  InstagramIcon,
   MaterialsIcon,
   PremiumIcon,
   ShippingIcon,
@@ -19,4 +21,9 @@ export const trustIconMap = {
   warranty: WarrantyIcon,
   shipping: ShippingIcon,
   support: SupportIcon,
+}
+
+export const socialIconMap = {
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
 }

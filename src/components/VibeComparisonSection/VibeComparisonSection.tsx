@@ -6,14 +6,15 @@ import styles from './VibeComparisonSection.module.css'
 export function VibeComparisonSection() {
   return (
     <section id="vibe" className={`section ${styles.wrap}`} aria-label="Every vibe, every moment">
-      <div className={styles.layout}>
-        <div className={styles.copy}>
-          <span className="eyebrow">{vibe.eyebrow}</span>
-          <h2 className={`display-title ${styles.title}`}>{vibe.title}</h2>
-          <p className={styles.body}>{vibe.body}</p>
-        </div>
+      <div className={styles.container}>
+        <div className={styles.layout}>
+          <div className={styles.copy}>
+            <span className="eyebrow">{vibe.eyebrow}</span>
+            <h2 className={`display-title ${styles.title}`}>{vibe.title}</h2>
+            <p className={styles.body}>{vibe.body}</p>
+          </div>
 
-        <div className={styles.cards}>
+          <div className={styles.cards}>
           <article className={`${styles.card} ${styles.refined}`}>
             <img
               className={styles.image}
@@ -61,6 +62,7 @@ export function VibeComparisonSection() {
               decoding="async"
             />
           </article>
+          </div>
         </div>
       </div>
     </section>

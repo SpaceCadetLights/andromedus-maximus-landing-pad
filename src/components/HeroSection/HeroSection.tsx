@@ -16,7 +16,6 @@ export function HeroSection() {
           fetchPriority="high"
         />
         <div className={styles.veil} aria-hidden="true" />
-        <div className={styles.orbit} aria-hidden="true" />
       </div>
 
       <div className={`section ${styles.inner}`}>
@@ -28,13 +27,15 @@ export function HeroSection() {
 
           <div className={`btn-row ${styles.actions}`}>
             {hero.actions.map((action) => (
-              <Button key={action.label} href={action.href} variant={action.variant}>
+              <Button key={action.label} href={action.href} variant={action.variant} rel="noopener">
                 {action.label}
               </Button>
             ))}
           </div>
 
-          <FeaturePillRow />
+          <div className={styles.pills}>
+            <FeaturePillRow />
+          </div>
         </div>
 
         <a className={styles.motion} href="#nebula" aria-label={hero.motionLabel}>

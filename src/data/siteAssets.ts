@@ -26,6 +26,9 @@ export type PatternAsset = {
 }
 
 export const siteAssets = {
+  brand: {
+    logo: `${BASE}/space-cadets-logo.png`,
+  },
   hero: {
     // Andromeda on the right, dark nebula/text-safe space on the left.
     desktop: `${BASE}/hero-desktop.png`,
@@ -44,9 +47,9 @@ export const siteAssets = {
   },
   vibe: {
     refinedDinner: `${BASE}/kitchen-table.png`,
-    // TODO(assets): Replace with a dedicated colorful celebration room shot
-    //   when available: public/assets/andromeda-maxima/vibe/celebration.png
-    expressiveCelebration: `${BASE}/stage.png`,
+    // Same dining room as the refined shot, but with the chandelier in vivid
+    // full-spectrum color — shows one product transforming the space.
+    expressiveCelebration: `${BASE}/expressive-celebration.png`,
     warmCoolSlider: `${BASE}/sliders/warm-cool.png`,
     vividSlider: `${BASE}/sliders/vivid.png`,
   },
