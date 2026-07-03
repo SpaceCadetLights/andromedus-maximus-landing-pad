@@ -1,0 +1,38 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.slot {
+  position: absolute;
+}
+
+.bubble {
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .layer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 0.65rem;
+    padding: 5.5rem 1rem 6.25rem;
+  }
+
+  .slot {
+    position: relative;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    max-width: none;
+  }
+
+  .bubble {
+    max-width: none;
+  }
+}

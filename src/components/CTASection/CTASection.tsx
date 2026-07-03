@@ -1,4 +1,6 @@
 import type { CtaLink } from '../../data/siteContent'
+import { CTAButton } from '../ui/CTAButton/CTAButton'
+import { TitleBlock } from '../ui/TitleBlock/TitleBlock'
 import styles from './CTASection.module.css'
 
 type CTASectionProps = {
@@ -17,21 +19,14 @@ export function CTASection({
   return (
     <section id="contact" className={styles.section}>
       <div className={`section-frame ${styles.card}`}>
-        <div className={styles.copy}>
-          <span className="eyebrow">{eyebrow}</span>
-          <h2>{title}</h2>
-          <p>{body}</p>
-        </div>
+        <TitleBlock eyebrow={eyebrow} title={title} align="left" size="md" />
+        <p className={styles.body}>{body}</p>
 
-        <div className={`button-row ${styles.actions}`}>
+        <div className={`${styles.actions} button-row`}>
           {actions.map((action) => (
-            <a
-              key={action.label}
-              className={`button-link button-link-${action.variant}`}
-              href={action.href}
-            >
+            <CTAButton key={action.label} href={action.href} variant={action.variant}>
               {action.label}
-            </a>
+            </CTAButton>
           ))}
         </div>
       </div>

@@ -1,36 +1,31 @@
 .section {
-  padding: 4rem 0 5rem;
+  padding: 3rem 0 4rem;
 }
 
 .card {
   display: grid;
-  gap: 2rem;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: clamp(1.5rem, 3vw, 2rem);
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: clamp(1.15rem, 2vw, 1.5rem);
   background:
-    radial-gradient(circle at top right, rgba(184, 144, 255, 0.12), transparent 30%),
-    linear-gradient(180deg, rgba(14, 17, 27, 0.9), rgba(8, 10, 15, 0.96));
-  box-shadow: var(--shadow);
+    linear-gradient(145deg, rgba(124, 247, 255, 0.06) 0%, transparent 45%),
+    linear-gradient(225deg, rgba(255, 122, 229, 0.05) 0%, transparent 40%),
+    linear-gradient(180deg, rgba(14, 17, 28, 0.92), rgba(6, 8, 14, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
-.copy {
-  max-width: 44rem;
-}
-
-.copy h2 {
-  margin: 1rem 0 0;
-  font-size: clamp(2rem, 4vw, 3.8rem);
-  line-height: 1.02;
-  font-weight: 300;
-}
-
-.copy p {
-  margin-top: 1rem;
-  font-size: 1rem;
+.body {
+  margin: 0.35rem 0 0;
+  max-width: 36rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--text-muted);
 }
 
 .actions {
-  align-items: stretch;
+  align-items: center;
+  flex-wrap: wrap;
 }

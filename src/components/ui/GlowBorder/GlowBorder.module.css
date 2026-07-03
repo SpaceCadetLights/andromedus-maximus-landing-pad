@@ -1,0 +1,74 @@
+.wrap {
+  position: relative;
+  border-radius: inherit;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.edge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.55;
+  background: linear-gradient(
+    135deg,
+    var(--glow-a, rgba(255, 255, 255, 0.12)),
+    var(--glow-b, rgba(255, 255, 255, 0.04))
+  );
+  filter: blur(0.5px);
+}
+
+.accent-neutral {
+  --glow-a: rgba(255, 255, 255, 0.14);
+  --glow-b: rgba(255, 255, 255, 0.05);
+}
+
+.accent-cyan {
+  --glow-a: rgba(124, 247, 255, 0.35);
+  --glow-b: rgba(124, 247, 255, 0.08);
+}
+
+.accent-magenta {
+  --glow-a: rgba(255, 122, 229, 0.32);
+  --glow-b: rgba(255, 122, 229, 0.08);
+}
+
+.accent-violet {
+  --glow-a: rgba(180, 140, 255, 0.34);
+  --glow-b: rgba(180, 140, 255, 0.09);
+}
+
+.accent-green {
+  --glow-a: rgba(124, 255, 154, 0.28);
+  --glow-b: rgba(124, 255, 154, 0.07);
+}
+
+.animated .edge {
+  opacity: 0.42;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    rgba(124, 247, 255, 0.22),
+    rgba(180, 140, 255, 0.18),
+    rgba(255, 122, 229, 0.16),
+    rgba(124, 255, 154, 0.14),
+    rgba(124, 247, 255, 0.22)
+  );
+  animation: glow-rotate 48s linear infinite;
+}
+
+@keyframes glow-rotate {
+  to {
+    --glow-angle: 360deg;
+  }
+}
+
+@property --glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}

@@ -21,6 +21,7 @@
   height: 100%;
   margin: 0 auto;
   padding: 1rem 0;
+  perspective: 1400px;
 }
 
 .frameDebug {
@@ -32,12 +33,19 @@
   position: relative;
   height: 100%;
   overflow: clip;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: clamp(1.5rem, 3vw, 2.2rem);
+  transform: translateZ(0) rotateX(0.35deg);
+  transform-style: preserve-3d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: clamp(1.25rem, 2.5vw, 1.85rem);
   background:
-    linear-gradient(180deg, rgba(14, 17, 27, 0.9), rgba(8, 10, 15, 0.96)),
-    rgba(8, 10, 14, 0.95);
-  box-shadow: var(--shadow);
+    linear-gradient(165deg, rgba(124, 247, 255, 0.06) 0%, transparent 42%),
+    linear-gradient(225deg, rgba(255, 122, 229, 0.05) 0%, transparent 38%),
+    linear-gradient(180deg, rgba(14, 17, 27, 0.88), rgba(6, 8, 14, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 4px 0 rgba(0, 0, 0, 0.35),
+    0 28px 70px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(124, 247, 255, 0.04);
 }
 
 .viewportDebug {
@@ -246,7 +254,7 @@
 }
 
 .scene {
-  transition: opacity 260ms ease, transform 260ms ease;
+  transition: opacity 160ms ease;
 }
 
 .sceneGlow {
@@ -257,11 +265,6 @@
     radial-gradient(circle at 22% 30%, var(--scene-accent), transparent 24%),
     linear-gradient(180deg, rgba(3, 4, 8, 0.1), rgba(3, 4, 8, 0.32)),
     var(--scene-base);
-}
-
-.mediaShell {
-  position: absolute;
-  inset: 0;
 }
 
 .backgroundVideo,
@@ -302,111 +305,6 @@
     radial-gradient(circle at center, rgba(255, 255, 255, 0), rgba(2, 3, 6, 0.22) 72%);
 }
 
-.sceneBadge,
-.sceneNote,
-.progressRail,
-.sceneHooks {
-  position: absolute;
-  z-index: 5;
-}
-
-.sceneBadge {
-  top: 1.4rem;
-  left: 1.4rem;
-  display: grid;
-  gap: 0.2rem;
-  padding: 0.8rem 0.95rem;
-  border-radius: 1rem;
-  background: rgba(10, 12, 18, 0.5);
-  backdrop-filter: blur(12px);
-}
-
-.sceneBadge span,
-.sceneHook span,
-.progressLabel {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(245, 241, 234, 0.55);
-}
-
-.sceneBadge strong,
-.sceneHook strong {
-  font-size: 0.92rem;
-  font-weight: 500;
-}
-
-.sceneNote {
-  right: 1.4rem;
-  bottom: 1.4rem;
-  max-width: min(18rem, calc(100% - 2.8rem));
-  padding: 0.8rem 0.95rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  background: rgba(10, 12, 18, 0.5);
-  color: rgba(245, 241, 234, 0.8);
-  font-size: 0.88rem;
-  backdrop-filter: blur(12px);
-}
-
-.progressRail {
-  top: 50%;
-  right: 1.5rem;
-  transform: translateY(-50%);
-  display: grid;
-  justify-items: center;
-  gap: 0.8rem;
-}
-
-.progressTrack {
-  width: 2px;
-  height: min(36vh, 18rem);
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.progressFill {
-  width: 100%;
-  height: 100%;
-  transform-origin: center bottom;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(185, 141, 255, 0.9));
-  box-shadow: 0 0 24px rgba(185, 141, 255, 0.35);
-}
-
-.progressValue {
-  font-size: 0.8rem;
-  color: rgba(245, 241, 234, 0.72);
-}
-
-.sceneHooks {
-  left: 1.4rem;
-  bottom: 1.4rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  max-width: calc(100% - 24rem);
-}
-
-.sceneHook {
-  padding: 0.8rem 0.95rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  background: rgba(10, 12, 18, 0.36);
-  backdrop-filter: blur(12px);
-}
-
-.sceneHook strong,
-.sceneHook span {
-  display: block;
-}
-
-@media (max-width: 900px) {
-  .sceneHooks {
-    max-width: calc(100% - 8rem);
-  }
-}
-
 @media (max-width: 768px) {
   .debugHeroOverlay {
     padding-bottom: 7rem;
@@ -444,31 +342,4 @@
     border-inline: none;
   }
 
-  .progressRail {
-    right: 1rem;
-    gap: 0.5rem;
-  }
-
-  .progressTrack {
-    height: 9rem;
-  }
-
-  .sceneBadge {
-    top: 6rem;
-    left: 1rem;
-  }
-
-  .sceneNote {
-    right: 1rem;
-    left: 1rem;
-    bottom: 6.6rem;
-    max-width: none;
-  }
-
-  .sceneHooks {
-    left: 1rem;
-    right: 4.2rem;
-    bottom: 1rem;
-    max-width: none;
-  }
 }

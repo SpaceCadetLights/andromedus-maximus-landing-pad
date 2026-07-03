@@ -1,0 +1,37 @@
+.outer {
+  border-radius: var(--ds-radius-md, 1rem);
+  max-width: min(17rem, calc(100vw - 2rem));
+}
+
+.panelInner {
+  border-radius: inherit;
+}
+
+.float {
+  animation: none;
+}
+
+.eyebrow {
+  margin: 0 0 0.3rem;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 241, 234, 0.48);
+}
+
+.title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  color: rgba(248, 250, 255, 0.95);
+}
+
+.body {
+  margin: 0.4rem 0 0;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: rgba(245, 241, 234, 0.68);
+}

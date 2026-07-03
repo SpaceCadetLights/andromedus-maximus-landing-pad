@@ -1,28 +1,23 @@
-import { useEffect } from 'react'
-import { CinematicScrollSection } from './components/CinematicScrollSection/CinematicScrollSection'
-import { overlayBeats, scenes } from './data/siteContent'
-
-const VIDEO_DEBUG_TEST_MODE = true
+import { TopNav } from './components/TopNav/TopNav'
+import { HeroSection } from './components/HeroSection/HeroSection'
+import { NebulaControlSection } from './components/NebulaControlSection/NebulaControlSection'
+import { VibeComparisonSection } from './components/VibeComparisonSection/VibeComparisonSection'
+import { FeatureCardsSection } from './components/FeatureCardsSection/FeatureCardsSection'
+import { TrustStrip } from './components/TrustStrip/TrustStrip'
+import { FooterCTA } from './components/FooterCTA/FooterCTA'
 
 function App() {
-  useEffect(() => {
-    document.body.classList.toggle('video-debug-test', VIDEO_DEBUG_TEST_MODE)
-
-    return () => {
-      document.body.classList.remove('video-debug-test')
-    }
-  }, [])
-
   return (
-    <div className="app-shell">
+    <div className="page-shell">
+      <TopNav />
       <main>
-        {/* Re-enable the other sections here after the video scrub test. */}
-        <CinematicScrollSection
-          scenes={scenes}
-          overlayBeats={overlayBeats}
-          debugMode={VIDEO_DEBUG_TEST_MODE}
-        />
+        <HeroSection />
+        <NebulaControlSection />
+        <VibeComparisonSection />
+        <FeatureCardsSection />
+        <TrustStrip />
       </main>
+      <FooterCTA />
     </div>
   )
 }

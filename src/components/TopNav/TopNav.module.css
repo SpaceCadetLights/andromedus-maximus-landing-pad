@@ -1,112 +1,160 @@
-.navShell {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 30;
-  padding-top: 1rem;
-  pointer-events: none;
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(180deg, rgba(5, 6, 12, 0.82), rgba(5, 6, 12, 0.35) 70%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
-.nav {
+.bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  min-height: 4.75rem;
-  padding: 0.7rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  background: rgba(8, 10, 16, 0.52);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
-  pointer-events: auto;
+  gap: 1.5rem;
+  height: 74px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.9rem;
-  min-width: 0;
+  gap: 0.65rem;
 }
 
 .brandMark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.18), transparent 45%),
-    linear-gradient(135deg, rgba(181, 138, 255, 0.3), rgba(103, 132, 255, 0.1));
-  color: #fff;
-  font-size: 0.82rem;
-  letter-spacing: 0.18em;
+  width: 30px;
+  height: 30px;
+  color: var(--gold);
 }
 
 .brandText {
-  display: grid;
-  gap: 0.05rem;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
 }
 
-.brandText span,
-.links a {
-  color: rgba(245, 241, 234, 0.76);
-}
-
-.brandText span {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.brandText strong {
-  font-size: 0.98rem;
+.brandName {
+  font-size: 0.82rem;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--ivory);
+}
+
+.brandSub {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--muted-soft);
 }
 
 .links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 180ms ease;
+}
+
+.link:hover {
+  color: var(--ivory);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.iconBtn {
   display: inline-flex;
   align-items: center;
-  gap: 1.25rem;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  color: var(--muted);
+  border: 1px solid transparent;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
 }
 
-.links a {
-  font-size: 0.92rem;
+.iconBtn:hover {
+  color: var(--ivory);
+  border-color: var(--card-border);
 }
 
-.navButton {
-  min-height: 2.8rem;
-  padding-inline: 1.1rem;
+.shopBtn {
+  min-height: 2.4rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.82rem;
+  border-color: var(--gold-soft);
+  color: var(--gold);
 }
 
-@media (max-width: 920px) {
-  .links a:not(.navButton) {
+.menuToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ivory);
+  cursor: pointer;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .links {
     display: none;
   }
-}
 
-@media (max-width: 640px) {
-  .navShell {
-    padding-top: 0.75rem;
+  .iconBtn {
+    display: none;
   }
 
-  .nav {
-    min-height: 4.25rem;
-    padding: 0.55rem 0.8rem;
+  .menuToggle {
+    display: inline-flex;
   }
 
-  .brandText span {
-    font-size: 0.68rem;
+  .shopBtn {
+    display: none;
   }
 
-  .brandText strong {
-    font-size: 0.78rem;
-    max-width: 13rem;
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem clamp(14px, 5vw, 28px) 1.75rem;
+    background: rgba(5, 6, 12, 0.96);
+    border-top: 1px solid var(--line);
+  }
+
+  .mobileLinks {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobileLink {
+    padding: 0.85rem 0.25rem;
+    font-size: 1rem;
+    color: var(--text);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobileShop {
+    width: 100%;
   }
 }

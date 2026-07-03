@@ -2,7 +2,8 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { CSSProperties, RefObject } from 'react'
 import {
   type DebugOverlayItem,
-  type OverlayBeat,
+  type FeatureBubbleDef,
+  type OverlayGroup,
   type SceneDefinition,
   type VideoAsset,
   debugOverlayItems,
@@ -11,13 +12,16 @@ import {
 import { getRangeProgress, getRangeVisibility } from '../../data/timeline'
 import { useScrollScrubVideo } from '../../hooks/useScrollScrubVideo'
 import { useScrollTimeline } from '../../hooks/useScrollTimeline'
-import { OverlayTextLayer } from '../OverlayTextLayer/OverlayTextLayer'
+import { FeatureBubbleLayer, type FeatureBubbleLayerHandle } from '../FeatureBubbleLayer/FeatureBubbleLayer'
+import { OverlayTextLayer, type OverlayTextLayerHandle } from '../OverlayTextLayer/OverlayTextLayer'
 import styles from './CinematicScrollSection.module.css'
 
 type CinematicScrollSectionProps = {
   scenes: SceneDefinition[]
-  overlayBeats: OverlayBeat[]
+  overlayGroups: OverlayGroup[]
+  featureBubbles: FeatureBubbleDef[]
   debugMode?: boolean
+  videoOnly?: boolean
 }
 
 type SceneMediaProps = {
@@ -35,7 +39,7 @@ type CinematicBackgroundProps = {
   debugMode?: boolean
 }
 
-const CINEMATIC_SCROLL_LENGTH_VH = 240
+const CINEMATIC_SCROLL_LENGTH_VH = 260
 
 function applyOverlayMotion(
   element: HTMLDivElement | null,
@@ -144,7 +148,7 @@ function SceneMedia({ scene, progress, debugMode = false }: SceneMediaProps) {
       className={styles.scene}
       style={{
         opacity: visibility,
-        transform: `scale(${1 + (1 - rangeProgress) * 0.08})`,
+        transform: `scale(${1 + (1 - rangeProgress) * 0.02})`,
       }}
       aria-hidden={visibility < 0.02}
     >
@@ -158,30 +162,31 @@ function SceneMedia({ scene, progress, debugMode = false }: SceneMediaProps) {
           } as CSSProperties
         }
       />
-
-      <div className={styles.mediaShell}>
-        <div className={styles.sceneBadge}>
-          <span>{scene.eyebrow}</span>
-          <strong>{scene.locationLabel}</strong>
-        </div>
-        <div className={styles.sceneNote}>{scene.media.fallbackLabel}</div>
-      </div>
     </article>
   )
 }
 
 export function CinematicScrollSection({
   scenes,
-  overlayBeats,
+  overlayGroups,
+  featureBubbles,
   debugMode = false,
+  videoOnly = false,
 }: CinematicScrollSectionProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const heroOverlayRef = useRef<HTMLDivElement | null>(null)
+  const overlayLayerRef = useRef<OverlayTextLayerHandle | null>(null)
+  const featureLayerRef = useRef<FeatureBubbleLayerHandle | null>(null)
   const { syncProgress, handleLoadedMetadata, handleVideoError } =
     useScrollScrubVideo(videoRef, { debug: debugMode, easing: 0.3 })
   const handleProgressChange = useCallback(
     (nextProgress: number) => {
       syncProgress(nextProgress)
+
+      if (!debugMode) {
+        overlayLayerRef.current?.setProgress(nextProgress)
+        featureLayerRef.current?.setProgress(nextProgress)
+      }
 
       if (!debugMode) {
         return
@@ -259,7 +264,7 @@ export function CinematicScrollSection({
               debugMode={debugMode}
             />
 
-            {debugMode ? (
+            {debugMode && !videoOnly ? (
               <>
                 <div
                   ref={heroOverlayRef}
@@ -304,19 +309,6 @@ export function CinematicScrollSection({
 
             {!debugMode ? (
               <>
-                <div className={styles.progressRail} aria-hidden="true">
-                  <span className={styles.progressLabel}>Sequence</span>
-                  <div className={styles.progressTrack}>
-                    <div
-                      className={styles.progressFill}
-                      style={{ transform: `scaleY(${Math.max(progress, 0.04)})` }}
-                    />
-                  </div>
-                  <span className={styles.progressValue}>
-                    {String(Math.round(progress * 100)).padStart(2, '0')}
-                  </span>
-                </div>
-
                 <div className={styles.sceneStack}>
                   {scenes.map((scene) => (
                     <SceneMedia
@@ -328,16 +320,9 @@ export function CinematicScrollSection({
                   ))}
                 </div>
 
-                <OverlayTextLayer progress={progress} beats={overlayBeats} />
+                <FeatureBubbleLayer ref={featureLayerRef} bubbles={featureBubbles} />
 
-                <div className={styles.sceneHooks} aria-hidden="true">
-                  {scenes.map((scene) => (
-                    <div key={scene.id} className={styles.sceneHook}>
-                      <span>{scene.eyebrow}</span>
-                      <strong>{scene.name}</strong>
-                    </div>
-                  ))}
-                </div>
+                <OverlayTextLayer ref={overlayLayerRef} groups={overlayGroups} />
               </>
             ) : null}
           </div>

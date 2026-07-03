@@ -1,0 +1,41 @@
+/* Layered depth + smooth color — keeps motion in CSS only (slow / static) */
+
+#root {
+  perspective: 1800px;
+}
+
+.app-shell {
+  transform: translateZ(0);
+}
+
+.app-shell::before {
+  content: "";
+  position: fixed;
+  inset: -20% -10% auto -10%;
+  height: 70vh;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(124, 247, 255, 0.14), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 10%, rgba(255, 122, 229, 0.1), transparent 50%),
+    radial-gradient(ellipse 60% 45% at 50% 5%, rgba(180, 140, 255, 0.12), transparent 48%);
+  filter: blur(2px);
+}
+
+.app-shell::after {
+  content: "";
+  position: fixed;
+  inset: auto -20% -25% -20%;
+  height: 55vh;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 70% 100%, rgba(103, 132, 255, 0.12), transparent 55%),
+    radial-gradient(ellipse 70% 60% at 20% 90%, rgba(124, 255, 154, 0.06), transparent 50%);
+  filter: blur(3px);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}

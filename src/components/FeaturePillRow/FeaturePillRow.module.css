@@ -1,0 +1,49 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  color: var(--gold);
+  background: rgba(231, 189, 114, 0.08);
+  border: 1px solid rgba(231, 189, 114, 0.22);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.title {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ivory);
+}
+
+.detail {
+  font-size: 0.76rem;
+  color: var(--muted-soft);
+}
+
+@media (max-width: 560px) {
+  .row {
+    gap: 1.1rem;
+  }
+}

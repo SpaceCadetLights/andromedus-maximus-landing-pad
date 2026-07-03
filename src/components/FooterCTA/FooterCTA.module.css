@@ -1,0 +1,102 @@
+.footer {
+  margin-top: clamp(3rem, 8vw, 6rem);
+  padding-bottom: 2.5rem;
+}
+
+.ctaPanel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--card-border);
+  background: linear-gradient(135deg, rgba(20, 16, 44, 0.85), rgba(9, 12, 22, 0.75));
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 4vw, 3rem);
+}
+
+.ctaGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 70% at 50% 120%, rgba(182, 120, 255, 0.3), transparent 60%),
+    radial-gradient(ellipse 40% 60% at 12% -20%, rgba(97, 217, 255, 0.14), transparent 60%);
+  pointer-events: none;
+}
+
+.ctaInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+}
+
+.ctaBody {
+  max-width: 44ch;
+  color: var(--muted);
+}
+
+.ctaActions {
+  margin-top: 0.75rem;
+  justify-content: center;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ivory);
+}
+
+.brandMark {
+  width: 24px;
+  height: 24px;
+  color: var(--gold);
+}
+
+.metaLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.metaLinks a {
+  font-size: 0.85rem;
+  color: var(--muted);
+  transition: color 180ms ease;
+}
+
+.metaLinks a:hover {
+  color: var(--ivory);
+}
+
+.legal {
+  font-size: 0.78rem;
+  color: var(--muted-soft);
+}
+
+@media (max-width: 640px) {
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

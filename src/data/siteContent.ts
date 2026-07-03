@@ -6,6 +6,8 @@ export type CtaLink = {
   variant: 'primary' | 'secondary' | 'ghost'
 }
 
+export type AccentTone = 'cyan' | 'magenta' | 'violet' | 'green'
+
 export type SceneDefinition = TimelineRange & {
   id: string
   name: string
@@ -31,13 +33,36 @@ export type VideoAsset = {
   preload: 'none' | 'metadata' | 'auto'
 }
 
+export type OverlayGroupId = 'narrative' | 'closing'
+
 export type OverlayBeat = TimelineRange & {
   id: string
+  groupId: OverlayGroupId
   eyebrow?: string
   title: string
   body: string
   align?: 'left' | 'center' | 'right'
   actions?: CtaLink[]
+}
+
+export type OverlayGroup = {
+  id: OverlayGroupId
+  label: string
+  beats: OverlayBeat[]
+}
+
+export type FeatureBubbleDef = TimelineRange & {
+  id: string
+  eyebrow?: string
+  title: string
+  body?: string
+  accent: AccentTone
+  placement: {
+    top?: string
+    right?: string
+    bottom?: string
+    left?: string
+  }
 }
 
 export type DebugOverlayItem = TimelineRange & {
@@ -50,10 +75,10 @@ export type DebugOverlayItem = TimelineRange & {
 
 export const heroContent = {
   eyebrow: 'Space Cadets Lighting',
-  title: 'ANDROMEDUS MAXIMUS',
-  subtitle: 'Sculptural light for immersive spaces',
+  title: 'ANDROMEDA MAXIMA',
+  subtitle: 'Sculptural Light for Immersive Spaces',
   body:
-    'A cinematic landing prototype for a monumental chandelier concept, designed to feel architectural, atmospheric, and ready for polished render swaps.',
+    'A cinematic product experience for a monumental lighting sculpture—architectural, atmospheric, and composed for the final visual pass.',
 }
 
 export const ctaButtons: CtaLink[] = [
@@ -73,6 +98,24 @@ export const ctaButtons: CtaLink[] = [
     variant: 'ghost',
   },
 ]
+
+export const detailSectionContent = {
+  eyebrow: 'Scene 06',
+  title: 'Up close.',
+  body: 'Macro footage lands here—texture, edge light, install detail.',
+  imageSrc: '/images/scene-cosmic-placeholder.svg',
+  imageLabel: 'Placeholder',
+  callouts: [
+    { label: 'Assembly', value: 'Modular, serviceable nodes' },
+    { label: 'Finish', value: 'Ceramic, metal, glass' },
+  ],
+}
+
+export const ctaSectionContent = {
+  eyebrow: 'Next',
+  title: 'Configure for your space.',
+  body: 'Consultation and spec packages—wire destinations when ready.',
+}
 
 export const videoAssets = {
   heroSequence: {
@@ -148,46 +191,69 @@ export const scenes: SceneDefinition[] = [
   },
 ]
 
-export const overlayBeats: OverlayBeat[] = [
+const narrativeBeats: OverlayBeat[] = [
   {
-    id: 'hero-title',
-    eyebrow: 'Andromedus Maximus',
-    title: 'ANDROMEDUS MAXIMUS',
-    body: 'Sculptural light for immersive spaces',
+    id: 'sequence-open',
+    groupId: 'narrative',
+    eyebrow: 'Film',
+    title: 'Scroll drives the sequence.',
+    body: 'Timecode, light, and silhouette stay aligned—nothing else competes with the frame.',
     align: 'center',
-    start: 0.02,
-    end: 0.22,
+    start: 0.05,
+    end: 0.28,
   },
   {
-    id: 'venue-copy',
-    eyebrow: 'Immersive venue',
-    title: 'Placeholder venue text',
-    body:
-      'Swap this block for final product storytelling, hospitality positioning, or designer intent once the rendered sequence is approved.',
+    id: 'spaces-copy',
+    groupId: 'narrative',
+    eyebrow: 'Spaces',
+    title: 'Venue to residence.',
+    body: 'One object, many rooms—warmth and precision without noise.',
     align: 'left',
-    start: 0.36,
-    end: 0.58,
+    start: 0.38,
+    end: 0.72,
   },
-  {
-    id: 'dining-copy',
-    eyebrow: 'Luxury dining room',
-    title: 'Placeholder dining text',
-    body:
-      'Use this beat for residential or private-club language, collection details, or a tighter material-focused narrative.',
-    align: 'right',
-    start: 0.7,
-    end: 0.86,
-  },
+]
+
+const closingBeats: OverlayBeat[] = [
   {
     id: 'final-cta',
-    eyebrow: 'Continue the conversation',
-    title: 'Ready for the final visual pass and product handoff.',
-    body:
-      'These buttons are already wired as clean placeholders for future Wix product or inquiry destinations.',
+    groupId: 'closing',
+    eyebrow: 'Action',
+    title: 'Continue.',
+    body: 'Inquiry, configuration, or product—placeholders until handoff.',
     align: 'center',
-    start: 0.84,
+    start: 0.78,
     end: 1,
     actions: ctaButtons,
+  },
+]
+
+export const overlayGroups: OverlayGroup[] = [
+  { id: 'narrative', label: 'Scene narrative', beats: narrativeBeats },
+  { id: 'closing', label: 'Closing', beats: closingBeats },
+]
+
+/** Flat list for imperative overlay updates and tooling */
+export const overlayBeats: OverlayBeat[] = overlayGroups.flatMap((group) => group.beats)
+
+export const featureBubbles: FeatureBubbleDef[] = [
+  {
+    id: 'feat-form-light',
+    eyebrow: 'Product',
+    title: 'Sculptural form · full-spectrum light',
+    accent: 'cyan',
+    start: 0.2,
+    end: 0.48,
+    placement: { top: '11%', left: '5%' },
+  },
+  {
+    id: 'feat-system',
+    eyebrow: 'System',
+    title: 'WiFi / DMX · custom installs',
+    accent: 'violet',
+    start: 0.42,
+    end: 0.68,
+    placement: { bottom: '14%', right: '6%' },
   },
 ]
 
@@ -195,7 +261,7 @@ export const debugOverlayItems: DebugOverlayItem[] = [
   {
     id: 'hero-title',
     kind: 'hero',
-    title: 'ANDROMEDUS',
+    title: 'ANDROMEDA',
     body: 'Sculptural light for immersive spaces',
     start: 0,
     end: 0.15,

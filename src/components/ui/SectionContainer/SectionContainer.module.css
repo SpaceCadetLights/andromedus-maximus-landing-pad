@@ -1,0 +1,28 @@
+.shell {
+  position: relative;
+}
+
+.width-default .frame {
+  width: min(100% - 32px, var(--page-max-width, 1440px));
+  margin-inline: auto;
+}
+
+.width-full .frame {
+  width: 100%;
+}
+
+.pad-none {
+  padding-block: 0;
+}
+
+.pad-sm {
+  padding-block: clamp(2rem, 5vw, 3rem);
+}
+
+.pad-md {
+  padding-block: clamp(3rem, 8vw, 5rem);
+}
+
+.pad-lg {
+  padding-block: clamp(4rem, 12vw, 7rem);
+}
