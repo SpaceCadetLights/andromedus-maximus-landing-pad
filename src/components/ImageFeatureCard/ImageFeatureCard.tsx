@@ -47,8 +47,8 @@ export function ImageFeatureCard({
             playsInline
             preload="metadata"
           >
+            <source src={video.hevcAlpha} type='video/mp4; codecs="hvc1"' />
             <source src={video.webm} type="video/webm" />
-            <source src={video.mp4} type="video/mp4" />
           </video>
         ) : imageSrc ? (
           <img

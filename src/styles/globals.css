@@ -252,6 +252,41 @@ p {
   }
 }
 
+/* ---------- Ultra-wide breakpoints ----------
+   Progressively widen the shared container and gutters so sections spread
+   into wide / ultra-wide viewports instead of stranding a narrow column in a
+   sea of background. Section content that should stay readable (body copy)
+   keeps its own ch-based caps, so only layout containers grow here. */
+@media (min-width: 1600px) {
+  :root {
+    --page-max: 1440px;
+  }
+
+  .section {
+    width: min(100% - 72px, var(--page-max));
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --page-max: 1680px;
+  }
+
+  .section {
+    width: min(100% - 96px, var(--page-max));
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --page-max: 2040px;
+  }
+
+  .section {
+    width: min(100% - 140px, var(--page-max));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

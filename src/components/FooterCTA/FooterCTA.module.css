@@ -1,5 +1,5 @@
 .closing {
-  margin-top: clamp(3rem, 8vw, 6rem);
+  margin-top: clamp(3.5rem, 9vw, 7rem);
 }
 
 .ctaPanel {
@@ -8,15 +8,15 @@
   border-radius: var(--radius-lg);
   border: 1px solid var(--card-border);
   background: linear-gradient(135deg, rgba(20, 16, 44, 0.85), rgba(9, 12, 22, 0.75));
-  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(3.5rem, 9vw, 7.5rem) clamp(1.5rem, 4vw, 3.5rem);
 }
 
 .ctaGlow {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 50% 70% at 50% 120%, rgba(182, 120, 255, 0.3), transparent 60%),
-    radial-gradient(ellipse 40% 60% at 12% -20%, rgba(97, 217, 255, 0.14), transparent 60%);
+    radial-gradient(ellipse 55% 75% at 50% 122%, rgba(182, 120, 255, 0.34), transparent 62%),
+    radial-gradient(ellipse 44% 64% at 12% -20%, rgba(97, 217, 255, 0.16), transparent 60%);
   pointer-events: none;
 }
 
@@ -26,20 +26,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.35rem;
   text-align: center;
 }
 
 .ctaTitle {
-  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  max-width: 18ch;
 }
 
 .ctaBody {
-  max-width: 44ch;
+  max-width: 46ch;
+  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
   color: var(--muted);
 }
 
 .ctaActions {
-  margin-top: 0.75rem;
+  margin-top: 1.35rem;
   justify-content: center;
+}
+
+.ctaActions :global(.btn) {
+  min-height: 3.3rem;
+  padding: 0.9rem 2rem;
+  font-size: 0.98rem;
 }

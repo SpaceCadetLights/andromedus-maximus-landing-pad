@@ -25,7 +25,13 @@ export type PatternAsset = {
 }
 
 export type VideoAsset = {
-  mp4: string
+  /**
+   * HEVC (H.265) with an alpha channel in an MP4, tagged `hvc1`. This is the
+   * only transparent-video format iOS/macOS Safari supports; Chrome/Firefox
+   * skip it (no HEVC-alpha decode) and fall through to the WebM below.
+   */
+  hevcAlpha: string
+  /** VP9-alpha WebM for Chrome/Firefox/Edge. */
   webm: string
   poster: string
 }
@@ -63,7 +69,7 @@ export const siteAssets = {
   cards: {
     remote: `${BASE}/cards/nebula-remote-poster.png`,
     remoteVideo: {
-      mp4: `${BASE}/cards/nebula-remote.mp4`,
+      hevcAlpha: `${BASE}/cards/nebula-remote-alpha.mp4`,
       webm: `${BASE}/cards/nebula-remote.webm`,
       poster: `${BASE}/cards/nebula-remote-poster.png`,
     } satisfies VideoAsset,

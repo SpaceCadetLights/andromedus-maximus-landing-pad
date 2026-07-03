@@ -43,6 +43,32 @@
   padding-bottom: clamp(2.5rem, 8vh, 5rem);
 }
 
+/* Wide screens: match the wider shared gutters and let the hero copy grow a
+   touch so it doesn't look marooned on the left of a very wide frame. */
+@media (min-width: 1600px) {
+  .inner {
+    width: min(100% - 72px, var(--page-max));
+  }
+
+  .copy {
+    max-width: 620px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .inner {
+    width: min(100% - 140px, var(--page-max));
+  }
+
+  .copy {
+    max-width: 720px;
+  }
+
+  .body {
+    max-width: 520px;
+  }
+}
+
 .copy {
   max-width: 560px;
   display: flex;

@@ -30,3 +30,36 @@
     height: 50px;
   }
 }
+
+/* Wide screens: swap the scroll strip for a wrapping grid so all patterns show
+   at once, with chips scaling up to fill the extra room. */
+@media (min-width: 1600px) {
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+    gap: clamp(0.85rem, 1.2vw, 1.4rem);
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .item {
+    width: 100%;
+  }
+
+  .chip {
+    width: 100%;
+    height: auto;
+    max-height: 76px;
+    object-fit: contain;
+  }
+}
+
+@media (min-width: 2560px) {
+  .strip {
+    grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  }
+
+  .chip {
+    max-height: 88px;
+  }
+}

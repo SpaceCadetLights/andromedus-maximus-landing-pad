@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  min-width: 0;
   max-width: 640px;
 }
 
@@ -48,14 +49,16 @@
 
 .control {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px minmax(0, 1fr);
   gap: clamp(1.25rem, 2.5vw, 2rem);
   align-items: center;
+  min-width: 0;
 }
 
 .phoneWrap {
   display: flex;
   justify-content: center;
+  min-width: 0;
 }
 
 .phone {
@@ -71,6 +74,7 @@
   gap: 1.05rem;
   margin: 0;
   padding: 0;
+  min-width: 0;
   list-style: none;
 }
 
@@ -103,6 +107,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  min-width: 0;
   padding-left: clamp(1rem, 2vw, 2rem);
   border-left: 1px solid var(--line);
 }
@@ -128,10 +133,11 @@
 }
 
 /* Ultra-wide: everything spreads into a single horizontal row —
-   copy · phone+bullets · palettes/patterns. */
+   copy · phone+bullets · palettes/patterns. The showcase column grows at
+   higher tiers so the palette/pattern grids get more columns. */
 @media (min-width: 1600px) {
   .grid {
-    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.35fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.3fr) minmax(0, 1.25fr);
     gap: clamp(2.5rem, 3.5vw, 4rem);
     align-items: center;
   }
@@ -140,12 +146,33 @@
     grid-column: auto;
     align-self: center;
   }
+
+  .phone {
+    max-width: 260px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .grid {
+    grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr) minmax(0, 1.55fr);
+    gap: clamp(3rem, 3.5vw, 5rem);
+  }
+}
+
+@media (min-width: 2560px) {
+  .grid {
+    grid-template-columns: minmax(320px, 0.75fr) minmax(0, 1.15fr) minmax(0, 1.85fr);
+  }
+
+  .phone {
+    max-width: 300px;
+  }
 }
 
 /* Tablet and below: stack into a single column. */
 @media (max-width: 1024px) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: clamp(1.75rem, 5vw, 2.5rem);
   }
 
@@ -161,10 +188,19 @@
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
   .control {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
     gap: 1.5rem;
+  }
+
+  .phoneWrap {
+    width: 100%;
+  }
+
+  .bullets {
+    width: 100%;
   }
 
   .phone {

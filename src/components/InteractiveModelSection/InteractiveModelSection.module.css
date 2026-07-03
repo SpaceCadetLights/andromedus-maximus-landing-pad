@@ -73,3 +73,20 @@
     height: clamp(360px, 60vh, 520px);
   }
 }
+
+/* Wide screens: give the 3D stage more vertical room to match the wider frame. */
+@media (min-width: 1600px) {
+  .stage {
+    height: clamp(560px, 62vh, 820px);
+  }
+
+  .copy {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .stage {
+    height: clamp(680px, 58vh, 960px);
+  }
+}
