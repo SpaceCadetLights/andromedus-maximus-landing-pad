@@ -73,16 +73,24 @@ export const featurePills: FeaturePill[] = [
   { id: 'premium', title: 'Premium Build', detail: 'Made to last', icon: 'premium' },
 ]
 
+export type NebulaBullet = {
+  id: string
+  title: string
+  detail: string
+  icon: 'patterns' | 'palettes' | 'custom' | 'remote'
+  accent: 'pink' | 'violet' | 'plain'
+}
+
 export const nebula = {
   eyebrow: 'Nebula App',
   title: 'Control the vibe of your space.',
   body: 'Design every moment with endless color, dynamic patterns, and intuitive control.',
   bullets: [
-    { id: 'patterns', title: '100+ Light Patterns', detail: 'A living library of motion.' },
-    { id: 'palettes', title: 'Wide Selection of Color Palettes', detail: 'Curated by lighting designers.' },
-    { id: 'custom', title: 'Create Your Own Custom Palettes', detail: 'Tune every hue to your room.' },
-    { id: 'control', title: 'Tap the Nebula app or Nebula touch remote', detail: 'Effortless, instant control.' },
-  ],
+    { id: 'patterns', title: '100+', detail: 'Light Patterns', icon: 'patterns', accent: 'pink' },
+    { id: 'palettes', title: 'Wide Selection', detail: 'of Color Palettes', icon: 'palettes', accent: 'pink' },
+    { id: 'custom', title: 'Create Your Own', detail: 'Custom Palettes', icon: 'custom', accent: 'violet' },
+    { id: 'control', title: 'Tap the Nebula app', detail: 'or Nebula touch remote.', icon: 'remote', accent: 'plain' },
+  ] satisfies NebulaBullet[],
   palettesTitle: 'Curated Palettes',
   patternsTitle: 'Dynamic Patterns',
   patternsMore: 'And many more to explore.',

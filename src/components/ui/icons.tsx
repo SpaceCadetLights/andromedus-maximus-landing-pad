@@ -120,6 +120,46 @@ export function SwapIcon(props: IconProps) {
   )
 }
 
+export function SparkleIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M12 3c.6 3.6 1.8 4.8 5.4 5.4-3.6.6-4.8 1.8-5.4 5.4-.6-3.6-1.8-4.8-5.4-5.4C10.2 7.8 11.4 6.6 12 3z" fill="currentColor" stroke="none" transform="translate(0 1.5)" />
+    </svg>
+  )
+}
+
+export function DotsGridIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <circle cx="9" cy="9" r="1.9" fill="currentColor" stroke="none" />
+      <circle cx="15" cy="9" r="1.9" fill="currentColor" stroke="none" />
+      <circle cx="9" cy="15" r="1.9" fill="currentColor" stroke="none" />
+      <circle cx="15" cy="15" r="1.9" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function PaletteBlobIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M12 4.5a7.5 7.5 0 000 15c1.2 0 1.8-.9 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.1 0-.9.7-1.6 1.7-1.6h1.3a3.5 3.5 0 003.5-3.5C20.6 7.3 16.9 4.5 12 4.5z" />
+      <circle cx="8.2" cy="10" r="1" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="8.4" r="1" fill="currentColor" stroke="none" />
+      <circle cx="15.6" cy="10" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function RemoteIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <rect x="8" y="2.5" width="8" height="19" rx="3" />
+      <circle cx="12" cy="7.5" r="1.6" />
+      <path d="M10.5 12.5h3M10.5 15h3M10.5 17.5h3" />
+    </svg>
+  )
+}
+
 export function CheckDot(props: IconProps) {
   return (
     <svg {...base} {...props} aria-hidden="true">

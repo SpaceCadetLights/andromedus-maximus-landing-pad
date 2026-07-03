@@ -13,6 +13,7 @@ export function PatternStrip() {
             loading="lazy"
             decoding="async"
           />
+          <span className={styles.name}>{pattern.name}</span>
         </li>
       ))}
     </ul>

@@ -54,6 +54,8 @@ export const siteAssets = {
     pageNebula: `${BASE}/nebula-page-bg.jpg`,
   },
   nebulaApp: {
+    // Angled hero render of the app on an iPhone (matches the reference card).
+    nebulaRendering: `${BASE}/nebula-app/nebula-rendering.png`,
     nebulaView: `${BASE}/nebula-app/nebula-view.png`,
     colorsPage: `${BASE}/nebula-app/colors-page.png`,
     listView: `${BASE}/nebula-app/list-view.png`,

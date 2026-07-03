@@ -1,77 +1,111 @@
-/* Pull the panel up so its rounded top overlaps the hero's faded base image,
-   giving the box a sense of sitting in front of the hero. */
+/* Pull the panel up so its rounded top overlaps the hero's faded base image. */
 .wrap {
   position: relative;
   z-index: 2;
   margin-top: clamp(-4.5rem, -4vw, -2.5rem);
 }
 
-/* Translucent glass panel — the page nebula reads softly through the blur. */
+/* Wide translucent glass card — matches the "Nebula app full card" reference.
+   overflow is visible so the phone can overhang the bottom edge; the background
+   gradient is still clipped to the rounded corners by border-radius. */
 .panel {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   border-radius: var(--radius-lg);
   border: 1px solid var(--card-border);
-  padding: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.15rem, 2vw, 1.9rem);
   box-shadow: var(--shadow-soft);
-  background: linear-gradient(135deg, rgba(14, 16, 30, 0.55), rgba(9, 11, 20, 0.42));
+  background: linear-gradient(135deg, rgba(14, 16, 30, 0.6), rgba(9, 11, 20, 0.5));
   backdrop-filter: blur(22px) saturate(130%);
   -webkit-backdrop-filter: blur(22px) saturate(130%);
 }
 
-/* Base layout (tablet → desktop): copy spans the top, then phone/bullets on
-   the left and palettes/patterns on the right. */
-.grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(1.75rem, 4vw, 3rem);
-  align-items: start;
+/* Spiral galaxy glowing in the lower-left behind the copy. */
+.galaxy {
+  position: absolute;
+  left: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(420px, 52%, 780px);
+  height: auto;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(ellipse 62% 60% at 44% 50%, #000 44%, transparent 76%);
+  mask-image: radial-gradient(ellipse 62% 60% at 44% 50%, #000 44%, transparent 76%);
 }
 
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(150px, 0.78fr) minmax(0, 0.92fr) minmax(0, 2.05fr);
+  grid-template-areas: 'copy phone bullets showcase';
+  gap: clamp(1rem, 2vw, 2.25rem);
+  align-items: center;
+}
+
+/* --- Copy --- */
 .copy {
-  grid-column: 1 / -1;
+  grid-area: copy;
+  align-self: center;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  justify-content: center;
+  gap: 0.85rem;
   min-width: 0;
-  max-width: 640px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #b7aef0;
+}
+
+.eyebrowIcon {
+  color: #9a86ff;
 }
 
 .title {
-  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
-  max-width: 16ch;
+  font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+  max-width: 12ch;
 }
 
 .body {
-  max-width: 46ch;
+  max-width: 32ch;
   color: var(--muted);
 }
 
-.control {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: clamp(1.25rem, 2.5vw, 2rem);
-  align-items: center;
-  min-width: 0;
-}
-
+/* --- Phone --- */
 .phoneWrap {
+  grid-area: phone;
+  align-self: center;
   display: flex;
   justify-content: center;
   min-width: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .phone {
-  width: 100%;
-  max-width: 230px;
-  height: auto;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
+  width: auto;
+  max-width: none;
+  /* Phone is taller than the card so its top and bottom edges float over the
+     box for depth. Symmetric negative margins keep it from growing the card. */
+  height: clamp(430px, 38vw, 545px);
+  margin-top: clamp(-6.5rem, -6vw, -4rem);
+  margin-bottom: clamp(-6.5rem, -6vw, -4rem);
+  filter: drop-shadow(0 34px 70px rgba(0, 0, 0, 0.62));
 }
 
+/* --- Feature bullets --- */
 .bullets {
+  grid-area: bullets;
   display: flex;
   flex-direction: column;
-  gap: 1.05rem;
+  gap: clamp(1rem, 1.6vw, 1.5rem);
   margin: 0;
   padding: 0;
   min-width: 0;
@@ -80,36 +114,73 @@
 
 .bullet {
   display: flex;
-  gap: 0.8rem;
-  align-items: flex-start;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .bulletIcon {
   flex: 0 0 auto;
-  margin-top: 2px;
-  color: var(--gold);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+}
+
+.bulletIcon[data-accent='pink'] {
+  color: #ef73d6;
+  border-color: rgba(239, 115, 214, 0.45);
+  box-shadow: 0 0 18px rgba(239, 115, 214, 0.15) inset;
+}
+
+.bulletIcon[data-accent='violet'] {
+  color: #9a86ff;
+  border-color: rgba(154, 134, 255, 0.45);
+  box-shadow: 0 0 18px rgba(154, 134, 255, 0.15) inset;
+}
+
+.bulletText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .bulletTitle {
-  display: block;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 600;
+  line-height: 1.25;
   color: var(--ivory);
 }
 
-.bulletDetail {
-  display: block;
-  font-size: 0.82rem;
-  color: var(--muted-soft);
+.bulletTitle[data-accent='pink'] {
+  color: #f483dc;
 }
 
+.bulletTitle[data-accent='violet'] {
+  color: #a897ff;
+}
+
+.bulletDetail {
+  font-size: 0.85rem;
+  color: var(--muted-soft);
+  line-height: 1.25;
+}
+
+/* --- Palettes / patterns box --- */
 .showcase {
+  grid-area: showcase;
   display: flex;
   flex-direction: column;
-  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  justify-content: center;
+  gap: clamp(0.85rem, 1.4vw, 1.25rem);
   min-width: 0;
-  padding-left: clamp(1rem, 2vw, 2rem);
-  border-left: 1px solid var(--line);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  background: rgba(6, 8, 16, 0.5);
+  padding: clamp(0.9rem, 1.3vw, 1.35rem) clamp(1rem, 1.5vw, 1.5rem);
 }
 
 .showBlock {
@@ -117,93 +188,76 @@
 }
 
 .showTitle {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.9rem;
+  letter-spacing: 0.02em;
+  color: var(--ivory);
+  margin-bottom: 0.55rem;
 }
 
 .moreNote {
-  margin-top: 0.65rem;
+  margin-top: 0.35rem;
   font-size: 0.82rem;
   font-style: italic;
   color: var(--gold);
 }
 
-/* Ultra-wide: everything spreads into a single horizontal row —
-   copy · phone+bullets · palettes/patterns. The showcase column grows at
-   higher tiers so the palette/pattern grids get more columns. */
-@media (min-width: 1600px) {
+/* ===== Responsive ===== */
+
+/* Below wide desktop: showcase drops to a full-width row beneath the trio. */
+@media (max-width: 1200px) {
   .grid {
-    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.3fr) minmax(0, 1.25fr);
-    gap: clamp(2.5rem, 3.5vw, 4rem);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.8fr) minmax(0, 1fr);
+    grid-template-areas:
+      'copy phone bullets'
+      'showcase showcase showcase';
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+}
+
+/* Tablet: copy beside phone, bullets and showcase stacked full width. */
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-areas:
+      'copy phone'
+      'bullets bullets'
+      'showcase showcase';
     align-items: center;
   }
 
-  .copy {
-    grid-column: auto;
-    align-self: center;
-  }
-
-  .phone {
-    max-width: 260px;
+  .bullets {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1.5rem;
   }
 }
 
-@media (min-width: 1920px) {
-  .grid {
-    grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr) minmax(0, 1.55fr);
-    gap: clamp(3rem, 3.5vw, 5rem);
-  }
-}
-
-@media (min-width: 2560px) {
-  .grid {
-    grid-template-columns: minmax(320px, 0.75fr) minmax(0, 1.15fr) minmax(0, 1.85fr);
-  }
-
-  .phone {
-    max-width: 300px;
-  }
-}
-
-/* Tablet and below: stack into a single column. */
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(1.75rem, 5vw, 2.5rem);
-  }
-
-  .copy {
-    grid-column: auto;
-  }
-
-  .showcase {
-    padding-left: 0;
-    border-left: none;
-    padding-top: clamp(1.5rem, 4vw, 2rem);
-    border-top: 1px solid var(--line);
-  }
-}
-
+/* Phone aspect: single stacked column. Palettes/patterns stack vertically. */
 @media (max-width: 640px) {
-  .control {
+  .grid {
     grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
-    gap: 1.5rem;
+    grid-template-areas:
+      'copy'
+      'phone'
+      'bullets'
+      'showcase';
+    gap: 1.75rem;
+    justify-items: stretch;
   }
 
   .phoneWrap {
     width: 100%;
   }
 
-  .bullets {
-    width: 100%;
+  .phone {
+    height: clamp(320px, 82vw, 380px);
+    margin-top: -1rem;
+    margin-bottom: -1rem;
   }
 
-  .phone {
-    max-width: 220px;
+  .bullets {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.1rem;
   }
 }
