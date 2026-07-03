@@ -9,20 +9,13 @@ export function NebulaControlSection() {
   return (
     <section id="nebula" className={`section ${styles.wrap}`} aria-label="Nebula app control">
       <div className={styles.panel}>
-        <div
-          className={styles.bg}
-          style={{ backgroundImage: `url(${siteAssets.backgrounds.spiralGalaxy})` }}
-          aria-hidden="true"
-        />
-        <div className={styles.bgVeil} aria-hidden="true" />
-
-        <div className={styles.copy}>
-          <span className="eyebrow">{nebula.eyebrow}</span>
-          <h2 className={`display-title ${styles.title}`}>{nebula.title}</h2>
-          <p className={styles.body}>{nebula.body}</p>
-        </div>
-
         <div className={styles.grid}>
+          <div className={styles.copy}>
+            <span className="eyebrow">{nebula.eyebrow}</span>
+            <h2 className={`display-title ${styles.title}`}>{nebula.title}</h2>
+            <p className={styles.body}>{nebula.body}</p>
+          </div>
+
           <div className={styles.control}>
             <div className={styles.phoneWrap}>
               <img

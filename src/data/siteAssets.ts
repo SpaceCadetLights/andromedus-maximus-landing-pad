@@ -6,9 +6,8 @@
  * can serve them reliably. To swap an image, drop a replacement at the same
  * path in `public/` and it will update automatically.
  *
- * TODO(assets): No dedicated "Nebula Touch Remote" product photo exists yet.
- *   Drop one at: public/assets/andromeda-maxima/cards/nebula-remote.png
- *   Until then, the remote card renders a graceful CSS placeholder.
+ * The "Nebula Touch Remote" card renders a looping product video (converted
+ * from the source .mov) instead of a still image.
  */
 
 const BASE = '/assets/andromeda-maxima'
@@ -23,6 +22,12 @@ export type PatternAsset = {
   id: string
   name: string
   src: string
+}
+
+export type VideoAsset = {
+  mp4: string
+  webm: string
+  poster: string
 }
 
 export const siteAssets = {
@@ -56,8 +61,12 @@ export const siteAssets = {
     vividSlider: `${BASE}/sliders/vivid.png`,
   },
   cards: {
-    // TODO(assets): Add a real remote product photo -> cards/nebula-remote.png
-    remote: null as string | null,
+    remote: `${BASE}/cards/nebula-remote-poster.png`,
+    remoteVideo: {
+      mp4: `${BASE}/cards/nebula-remote.mp4`,
+      webm: `${BASE}/cards/nebula-remote.webm`,
+      poster: `${BASE}/cards/nebula-remote-poster.png`,
+    } satisfies VideoAsset,
     craftsmanship: `${BASE}/closeup.png`,
     proStage: `${BASE}/stage.png`,
   },

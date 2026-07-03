@@ -22,7 +22,8 @@ export function FeatureCardsSection() {
             cta={card.cta}
             imageSrc={siteAssets.cards[card.imageKey]}
             imageAlt={altMap[card.imageKey]}
-            missingLabel="Remote photo coming soon"
+            video={card.imageKey === 'remote' ? siteAssets.cards.remoteVideo : undefined}
+            floating={card.imageKey === 'remote'}
           />
         ))}
       </div>

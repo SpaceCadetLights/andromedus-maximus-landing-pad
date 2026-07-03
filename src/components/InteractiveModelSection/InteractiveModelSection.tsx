@@ -1,33 +1,17 @@
-import { useEffect, useRef } from 'react'
+import Spline from '@splinetool/react-spline'
+import type { Application } from '@splinetool/runtime'
 import { model } from '../../data/pageContent'
 import styles from './InteractiveModelSection.module.css'
 
 export function InteractiveModelSection() {
-  const mountRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    let cancelled = false
-
-    // Load the Spline Viewer web component on demand, then mount it with a
-    // transparent background so the model floats over the page's nebula.
-    import('@splinetool/viewer').then(() => {
-      if (cancelled || !mountRef.current) return
-      const viewer = document.createElement('spline-viewer')
-      viewer.setAttribute('url', model.sceneUrl)
-      // Force a pure-black scene background; combined with mix-blend-mode:screen
-      // on the container, the black drops out so the luminous sculpture floats
-      // over the page's nebula (the scene can't be edited for real alpha).
-      viewer.setAttribute('background', 'black')
-      viewer.style.width = '100%'
-      viewer.style.height = '100%'
-      viewer.style.display = 'block'
-      mountRef.current.replaceChildren(viewer)
-    })
-
-    return () => {
-      cancelled = true
+  function handleLoad(spline: Application) {
+    // Make the scene background transparent so the model floats over the page.
+    try {
+      spline.setBackgroundColor('transparent')
+    } catch {
+      /* older runtimes may not support this — safe to ignore */
     }
-  }, [])
+  }
 
   return (
     <section
@@ -42,9 +26,7 @@ export function InteractiveModelSection() {
       </div>
 
       <div className={styles.stage}>
-        <div className={styles.nebula} aria-hidden="true" />
-        <div className={styles.glow} aria-hidden="true" />
-        <div ref={mountRef} className={styles.viewer} />
+        <Spline scene={model.sceneUrl} className={styles.viewer} onLoad={handleLoad} />
         <span className={styles.hint} aria-hidden="true">
           {model.hint}
         </span>

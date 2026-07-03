@@ -1,7 +1,12 @@
+/* Pull the panel up so its rounded top overlaps the hero's faded base image,
+   giving the box a sense of sitting in front of the hero. */
 .wrap {
-  margin-top: clamp(3rem, 8vw, 6rem);
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(-4.5rem, -4vw, -2.5rem);
 }
 
+/* Translucent glass panel — the page nebula reads softly through the blur. */
 .panel {
   position: relative;
   overflow: hidden;
@@ -9,32 +14,26 @@
   border: 1px solid var(--card-border);
   padding: clamp(1.5rem, 4vw, 3rem);
   box-shadow: var(--shadow-soft);
+  background: linear-gradient(135deg, rgba(14, 16, 30, 0.55), rgba(9, 11, 20, 0.42));
+  backdrop-filter: blur(22px) saturate(130%);
+  -webkit-backdrop-filter: blur(22px) saturate(130%);
 }
 
-.bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.5;
-}
-
-.bgVeil {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 70% at 20% 40%, rgba(5, 6, 12, 0.35), transparent 70%),
-    linear-gradient(180deg, rgba(6, 8, 16, 0.82), rgba(6, 8, 16, 0.9));
+/* Base layout (tablet → desktop): copy spans the top, then phone/bullets on
+   the left and palettes/patterns on the right. */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
 }
 
 .copy {
-  position: relative;
-  z-index: 1;
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
   max-width: 640px;
-  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
 }
 
 .title {
@@ -47,19 +46,9 @@
   color: var(--muted);
 }
 
-/* Wide: phone + bullets on the left, palettes/patterns on the right. */
-.grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(1.75rem, 4vw, 3rem);
-  align-items: center;
-}
-
 .control {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 220px 1fr;
   gap: clamp(1.25rem, 2.5vw, 2rem);
   align-items: center;
 }
@@ -71,7 +60,7 @@
 
 .phone {
   width: 100%;
-  max-width: 240px;
+  max-width: 230px;
   height: auto;
   filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
 }
@@ -114,7 +103,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 2.5vw, 1.75rem);
-  padding-left: clamp(0rem, 2vw, 2rem);
+  padding-left: clamp(1rem, 2vw, 2rem);
   border-left: 1px solid var(--line);
 }
 
@@ -138,10 +127,30 @@
   color: var(--gold);
 }
 
+/* Ultra-wide: everything spreads into a single horizontal row —
+   copy · phone+bullets · palettes/patterns. */
+@media (min-width: 1600px) {
+  .grid {
+    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.35fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 3.5vw, 4rem);
+    align-items: center;
+  }
+
+  .copy {
+    grid-column: auto;
+    align-self: center;
+  }
+}
+
+/* Tablet and below: stack into a single column. */
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr;
     gap: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  .copy {
+    grid-column: auto;
   }
 
   .showcase {

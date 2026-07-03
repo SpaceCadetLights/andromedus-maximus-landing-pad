@@ -56,7 +56,7 @@ export const model = {
   title: 'Explore every angle.',
   body: 'Spin, tilt, and get up close with Andromeda Maxima. Drag to rotate the sculpture in real time and see how the form catches light from every direction.',
   // Spline Viewer scene URL (rendered with a transparent background).
-  sceneUrl: 'https://my.spline.design/flowersculpturecopy-lbHB6xrQ75CWlzx5oLEFfYuy/scene.splinecode',
+  sceneUrl: 'https://prod.spline.design/wJaHbf24DjkaaKnq/scene.splinecode',
   hint: 'Drag to rotate · Scroll to zoom',
 }
 

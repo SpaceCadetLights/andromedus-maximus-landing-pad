@@ -21,50 +21,23 @@
   color: var(--muted);
 }
 
+/* Frameless, fully transparent stage — the model floats over the page nebula.
+   react-spline forces its wrapper to height:100%, so the height lives here. */
 .stage {
   position: relative;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--shadow-soft);
-  padding: clamp(0.75rem, 2vw, 1.25rem);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* Brighter nebula wash directly behind the model — lets the deep-space
-   backdrop read more strongly here than across the rest of the page. */
-.nebula {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: url('/assets/andromeda-maxima/nebula-page-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.4;
-  -webkit-mask-image: radial-gradient(ellipse 60% 62% at 50% 46%, #000 22%, transparent 72%);
-  mask-image: radial-gradient(ellipse 60% 62% at 50% 46%, #000 22%, transparent 72%);
-  pointer-events: none;
-}
-
-/* Soft central glow so the sculpture appears lit from within its own halo. */
-.glow {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 42% 46% at 50% 44%, rgba(190, 160, 255, 0.22), transparent 70%),
-    radial-gradient(ellipse 55% 55% at 50% 46%, rgba(231, 189, 114, 0.1), transparent 72%);
-  pointer-events: none;
+  width: 100%;
+  height: clamp(440px, 68vh, 720px);
 }
 
 .viewer {
   position: relative;
-  z-index: 1;
   width: 100%;
-  height: clamp(440px, 68vh, 720px);
-  /* Drop the model's black scene background so it reads over the nebula. */
-  mix-blend-mode: screen;
+  height: 100%;
   animation: viewerFadeIn 0.8s ease both;
+}
+
+.viewer canvas {
+  background: transparent !important;
 }
 
 @keyframes viewerFadeIn {
@@ -96,7 +69,7 @@
 }
 
 @media (max-width: 640px) {
-  .viewer {
+  .stage {
     height: clamp(360px, 60vh, 520px);
   }
 }
