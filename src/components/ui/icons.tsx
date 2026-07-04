@@ -160,6 +160,47 @@ export function RemoteIcon(props: IconProps) {
   )
 }
 
+export function ElectricalBoxIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M12 3l7.5 4.1v8.8L12 20l-7.5-4.1V7.1z" />
+      <path d="M4.7 7.3L12 11.4l7.3-4.1" />
+      <path d="M12 11.4V20" />
+      <circle cx="12" cy="11.4" r="1.15" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function ChainLinkIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M9.2 14.8a3.2 3.2 0 010-4.5l2-2a3.2 3.2 0 014.5 4.5l-1 1" />
+      <path d="M14.8 9.2a3.2 3.2 0 010 4.5l-2 2a3.2 3.2 0 01-4.5-4.5l1-1" />
+    </svg>
+  )
+}
+
+export function MountingHardwareIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M8 4.5h-2M8 4.5h2M8 4.5v11" />
+      <path d="M6.5 15.5h3l-.7 3.5a0.8 0.8 0 01-1.6 0z" />
+      <circle cx="16" cy="5.6" r="2" />
+      <path d="M16 7.6v8.4" />
+      <path d="M14.4 16h3.2l-.7 3.4a0.8 0.8 0 01-1.6 0z" />
+    </svg>
+  )
+}
+
+export function TaperedCoverIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M4.5 5.5h15" />
+      <path d="M5.5 5.5l5.2 6.3v6.4l2.6 1.3v-7.7l5.2-6.3" />
+    </svg>
+  )
+}
+
 export function CheckDot(props: IconProps) {
   return (
     <svg {...base} {...props} aria-hidden="true">
@@ -211,6 +252,14 @@ export function ChevronDown(props: IconProps) {
   return (
     <svg {...base} {...props} aria-hidden="true">
       <path d="M6 9l6 6 6-6" />
+    </svg>
+  )
+}
+
+export function ChevronRight(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M9 6l6 6-6 6" />
     </svg>
   )
 }

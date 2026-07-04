@@ -25,3 +25,6 @@ Andromeda Maxima Website Assets/
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright CLI debug artifacts (screenshots/snapshots)
+.playwright-cli/

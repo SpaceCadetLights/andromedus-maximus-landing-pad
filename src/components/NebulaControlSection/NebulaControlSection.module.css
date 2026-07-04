@@ -9,30 +9,44 @@
    overflow is visible so the phone can overhang the bottom edge; the background
    gradient is still clipped to the rounded corners by border-radius. */
 .panel {
+  --panel-pad: clamp(1.15rem, 2vw, 1.9rem);
   position: relative;
   overflow: visible;
   border-radius: var(--radius-lg);
   border: 1px solid var(--card-border);
-  padding: clamp(1.15rem, 2vw, 1.9rem);
+  padding: var(--panel-pad);
   box-shadow: var(--shadow-soft);
   background: linear-gradient(135deg, rgba(14, 16, 30, 0.6), rgba(9, 11, 20, 0.5));
   backdrop-filter: blur(22px) saturate(130%);
   -webkit-backdrop-filter: blur(22px) saturate(130%);
 }
 
-/* Spiral galaxy glowing in the lower-left behind the copy. */
+/* Spiral galaxy glowing in the lower-left behind the copy.
+   The image lives inside `.middleRow`, which is `display: contents` on
+   desktop/tablet, so the galaxy's containing block is `.grid` (the panel's
+   content box). The `--panel-pad` offsets below re-anchor it to the same
+   absolute position it had as a direct panel child, so desktop is unchanged.
+   Vertically, the grid's center equals the panel's center, so `top: 50%`
+   needs no compensation. */
 .galaxy {
   position: absolute;
-  left: -4%;
+  left: calc(-4% - 1.08 * var(--panel-pad));
   top: 50%;
   transform: translateY(-50%);
-  width: clamp(420px, 52%, 780px);
+  width: clamp(420px, calc(52% + 1.04 * var(--panel-pad)), 780px);
   height: auto;
   opacity: 0.55;
   pointer-events: none;
   z-index: 0;
   -webkit-mask-image: radial-gradient(ellipse 62% 60% at 44% 50%, #000 44%, transparent 76%);
   mask-image: radial-gradient(ellipse 62% 60% at 44% 50%, #000 44%, transparent 76%);
+}
+
+/* Phone + bullets wrapper. Transparent on desktop/tablet so its children act
+   as direct grid items (grid areas `phone` / `bullets`); becomes a real
+   side-by-side row on mobile. */
+.middleRow {
+  display: contents;
 }
 
 .grid {
@@ -187,6 +201,31 @@
   min-width: 0;
 }
 
+.stripWrap {
+  position: relative;
+  min-width: 0;
+}
+
+/* Subtle white chevron + right-edge fade hinting the palette / pattern strips
+   scroll horizontally. Hidden by default; revealed only where the showcase is
+   compressed (tablet), so desktop and phone layouts are untouched. */
+.scrollHint {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: flex-end;
+  width: 42px;
+  padding-right: 2px;
+  padding-bottom: 1.15rem;
+  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(90deg, rgba(8, 10, 18, 0) 0%, rgba(8, 10, 18, 0.72) 78%);
+  pointer-events: none;
+  z-index: 3;
+}
+
 .showTitle {
   font-size: 0.9rem;
   font-weight: 600;
@@ -204,60 +243,162 @@
 
 /* ===== Responsive ===== */
 
-/* Below wide desktop: showcase drops to a full-width row beneath the trio. */
-@media (max-width: 1200px) {
+/* Tablet / iPad — portrait (~834px) and landscape (~1194px) down to just above
+   phone width: keep the SAME single horizontal row as desktop
+   (copy | phone | bullets | showcase). Columns, gaps, copy, phone, and the
+   showcase are compressed so it all stays on one plane with no dead space;
+   the showcase narrows and its strips scroll horizontally with a chevron hint. */
+@media (min-width: 641px) and (max-width: 1200px) {
   .grid {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.8fr) minmax(0, 1fr);
-    grid-template-areas:
-      'copy phone bullets'
-      'showcase showcase showcase';
-    gap: clamp(1.5rem, 3vw, 2.25rem);
-  }
-}
-
-/* Tablet: copy beside phone, bullets and showcase stacked full width. */
-@media (max-width: 860px) {
-  .grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    grid-template-areas:
-      'copy phone'
-      'bullets bullets'
-      'showcase showcase';
+    grid-template-columns:
+      minmax(0, 1fr) minmax(0, auto) minmax(0, 0.9fr) minmax(0, 1.25fr);
+    grid-template-areas: 'copy phone bullets showcase';
+    gap: clamp(0.6rem, 1.4vw, 1.3rem);
     align-items: center;
   }
 
+  .title {
+    font-size: clamp(1.3rem, 2.3vw, 2rem);
+    max-width: 14ch;
+  }
+
+  .body {
+    font-size: 0.9rem;
+    max-width: 30ch;
+  }
+
+  .copy {
+    gap: 0.6rem;
+  }
+
+  /* Smaller phone so the single row stays compact; the `auto` phone column
+     tracks its width exactly, so it never overflows or overlaps the bullets. */
+  .phone {
+    height: clamp(240px, 28vw, 380px);
+    margin-top: clamp(-3rem, -3.5vw, -1.75rem);
+    margin-bottom: clamp(-3rem, -3.5vw, -1.75rem);
+  }
+
   .bullets {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem 1.5rem;
+    gap: clamp(0.7rem, 1.4vw, 1.15rem);
+  }
+
+  .bulletIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .bulletIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .bulletTitle {
+    font-size: 0.9rem;
+  }
+
+  .bulletDetail {
+    font-size: 0.8rem;
+  }
+
+  /* Compressed showcase on the right of the bullets; strips scroll sideways. */
+  .showcase {
+    gap: 0.7rem;
+    padding: clamp(0.75rem, 1.1vw, 1.1rem) clamp(0.7rem, 1vw, 1rem);
+  }
+
+  .showTitle {
+    font-size: 0.82rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .scrollHint {
+    display: flex;
   }
 }
 
-/* Phone aspect: single stacked column. Palettes/patterns stack vertically. */
+/* Phone-width: copy on top, then a phone|bullets row with the galaxy centered
+   behind it, then the palettes/patterns showcase full width beneath. */
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       'copy'
-      'phone'
-      'bullets'
+      'middle'
       'showcase';
     gap: 1.75rem;
     justify-items: stretch;
   }
 
+  /* Real 2-column row (phone left, bullets right) that also anchors the
+     galaxy backdrop behind both. */
+  .middleRow {
+    display: grid;
+    grid-area: middle;
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    grid-template-areas: 'phone bullets';
+    align-items: center;
+    gap: clamp(0.4rem, 2vw, 0.85rem);
+    position: relative;
+    min-width: 0;
+  }
+
+  /* Subtle spiral centered behind the phone + bullets row. A bit wider than
+     the row for a fuller backdrop; the global img max-width cap is lifted and
+     the size is capped at 94vw so it can never cause horizontal overflow. */
+  .galaxy {
+    left: 50%;
+    top: 50%;
+    max-width: none;
+    width: max(340px, min(138%, 94vw));
+    transform: translate(-50%, -50%);
+    opacity: 0.42;
+    -webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 40%, transparent 74%);
+    mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 40%, transparent 74%);
+  }
+
   .phoneWrap {
-    width: 100%;
+    width: auto;
+    min-width: 0;
   }
 
   .phone {
-    height: clamp(320px, 82vw, 380px);
-    margin-top: -1rem;
-    margin-bottom: -1rem;
+    height: clamp(240px, 62vw, 320px);
+    margin-top: -1.25rem;
+    margin-bottom: -1.25rem;
   }
 
+  /* Compact single-column bullets so the block sits neatly to the phone's
+     right without wrapping or overflow. Positioned so they paint above the
+     absolutely-positioned galaxy backdrop. */
   .bullets {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.7rem, 2.6vw, 0.95rem);
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bullet {
+    gap: 0.5rem;
+  }
+
+  .bulletIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .bulletIcon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .bulletTitle {
+    font-size: 0.85rem;
+  }
+
+  .bulletDetail {
+    font-size: 0.74rem;
   }
 }

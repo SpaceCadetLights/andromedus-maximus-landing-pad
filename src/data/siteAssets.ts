@@ -78,6 +78,14 @@ export const siteAssets = {
     craftsmanship: `${BASE}/closeup.png`,
     proStage: `${BASE}/stage.png`,
   },
+  dimensions: {
+    // Full hanging chandelier with ceiling mount (transparent) — hero diagram.
+    chandelier: `${BASE}/dimensions/chandelier-ceiling-mount.png`,
+    // Ceiling mount seen from the top/side (transparent).
+    ceilingMountTop: `${BASE}/dimensions/ceiling-mount-top.png`,
+    // Ceiling mount underside showing the bracket (transparent).
+    ceilingMountUnderside: `${BASE}/dimensions/ceiling-mount-underside.png`,
+  },
   palettes: [
     { id: 'cosmic-dusk', name: 'Cosmic Dusk', src: `${BASE}/palettes/cosmic-dusk.png` },
     { id: 'aurora-borealis', name: 'Aurora Borealis', src: `${BASE}/palettes/aurora-borealis.png` },

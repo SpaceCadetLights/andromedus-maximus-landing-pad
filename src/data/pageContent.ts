@@ -114,6 +114,93 @@ export const vibe = {
   },
 }
 
+export type DimensionInstallBullet = {
+  id: string
+  title: string
+  detail: string
+  icon: 'electricalBox' | 'chainLink' | 'mountingHardware' | 'taperedCover'
+  accent: 'pink' | 'violet'
+}
+
+export type DimensionCallout = {
+  id: string
+  value: string
+  label: string
+}
+
+export const dimensions = {
+  eyebrow: 'Technical Specifications',
+  title: 'Dimensions & Installation',
+  intro: 'Andromeda Maxima is designed for easy installation and adjustable to suit your space.',
+  bullets: [
+    {
+      id: 'electrical-box',
+      title: 'Mounts to Standard Electrical Box',
+      detail: 'Compatible with standard chandeliers / ceiling electrical boxes.',
+      icon: 'electricalBox',
+      accent: 'violet',
+    },
+    {
+      id: 'hanging-chain',
+      title: 'Adjustable Hanging Chain',
+      detail: 'Easily adjust the chain length to achieve your perfect drop.',
+      icon: 'chainLink',
+      accent: 'violet',
+    },
+    {
+      id: 'mounting-hardware',
+      title: 'Metal Mounting Hardware Included',
+      detail: 'All necessary hardware included for a secure and stable installation.',
+      icon: 'mountingHardware',
+      accent: 'violet',
+    },
+    {
+      id: 'tapered-cover',
+      title: '3D-Printed Tapered Cover',
+      detail: '3D-printed tapered cover painted to match the finish of the light.',
+      icon: 'taperedCover',
+      accent: 'violet',
+    },
+  ] satisfies DimensionInstallBullet[],
+  callouts: {
+    ceilingDiameter: {
+      id: 'ceiling-diameter',
+      value: '12 in / 30.5 cm',
+      label: 'Ceiling Mount Diameter',
+    },
+    hangingHeight: {
+      id: 'hanging-height',
+      value: '1 m / 39.4 in',
+      label: 'Adjustable Hanging Height',
+    },
+    overallHeight: {
+      id: 'overall-height',
+      value: '33 in / 84 cm',
+      label: 'Overall Height (Light Body Only)',
+    },
+    lightDiameter: {
+      id: 'light-diameter',
+      value: '20 in / 51 cm',
+      label: 'Light Diameter',
+    },
+  } satisfies Record<string, DimensionCallout>,
+  chandelierAlt:
+    'Andromeda Maxima chandelier hanging from its ceiling mount, shown with dimension callouts',
+  note: 'Professional installation recommended. Suitable for indoor use in dry locations.',
+  detail: {
+    topView: {
+      caption: 'Top View',
+      alt: 'Andromeda Maxima ceiling mount canopy viewed from the top',
+    },
+    undersideView: {
+      caption: 'Underside View',
+      alt: 'Andromeda Maxima ceiling mount underside showing the mounting bracket',
+    },
+    title: 'Ceiling Mount Assembly',
+    body: 'Standard canopy with wide flange, 3D-printed tapered cover, and mounting bracket finish.',
+  },
+}
+
 export type FeatureCard = {
   id: string
   eyebrow?: string

@@ -1,5 +1,17 @@
 .wrap {
-  margin-top: clamp(3rem, 8vw, 6rem);
+  margin-top: clamp(2rem, 4.5vw, 3.25rem);
+  margin-bottom: clamp(1rem, 2vw, 1.75rem);
+}
+
+/* Two-column layout on desktop/tablet: copy on the left, 3D viewer on the right.
+   minmax(0, …) keeps the Spline canvas from causing min-size blowout. */
+@media (min-width: 860px) {
+  .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
 }
 
 .copy {
@@ -10,6 +22,15 @@
   margin: 0 auto clamp(1.75rem, 4vw, 2.75rem);
   text-align: center;
   align-items: center;
+  min-width: 0;
+}
+
+@media (min-width: 860px) {
+  .copy {
+    margin: 0;
+    text-align: left;
+    align-items: flex-start;
+  }
 }
 
 .title {
@@ -26,7 +47,8 @@
 .stage {
   position: relative;
   width: 100%;
-  height: clamp(440px, 68vh, 720px);
+  min-width: 0;
+  height: clamp(380px, 52vh, 560px);
 }
 
 .viewer {
@@ -70,14 +92,14 @@
 
 @media (max-width: 640px) {
   .stage {
-    height: clamp(360px, 60vh, 520px);
+    height: clamp(340px, 52vh, 460px);
   }
 }
 
 /* Wide screens: give the 3D stage more vertical room to match the wider frame. */
 @media (min-width: 1600px) {
   .stage {
-    height: clamp(560px, 62vh, 820px);
+    height: clamp(460px, 50vh, 640px);
   }
 
   .copy {
@@ -87,6 +109,6 @@
 
 @media (min-width: 2560px) {
   .stage {
-    height: clamp(680px, 58vh, 960px);
+    height: clamp(560px, 46vh, 760px);
   }
 }

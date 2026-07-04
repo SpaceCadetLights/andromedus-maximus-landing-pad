@@ -4,6 +4,7 @@ import { InteractiveModelSection } from './components/InteractiveModelSection/In
 import { NebulaControlSection } from './components/NebulaControlSection/NebulaControlSection'
 import { VibeComparisonSection } from './components/VibeComparisonSection/VibeComparisonSection'
 import { FeatureCardsSection } from './components/FeatureCardsSection/FeatureCardsSection'
+import { DimensionsSection } from './components/DimensionsSection/DimensionsSection'
 import { TrustStrip } from './components/TrustStrip/TrustStrip'
 import { FooterCTA } from './components/FooterCTA/FooterCTA'
 import { SiteFooter } from './components/SiteFooter/SiteFooter'
@@ -17,6 +18,7 @@ function App() {
         <NebulaControlSection />
         <VibeComparisonSection />
         <FeatureCardsSection />
+        <DimensionsSection />
         <TrustStrip />
         <InteractiveModelSection />
         <FooterCTA />
